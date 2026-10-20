@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27/%3E">
+<meta name="theme-color" content="#32006b">
+<title>Variantes da navegação horizontal · Filazero</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="variantes.css">
+</head>
+<body>
+<a class="skip" href="#variantes">Ir para as variantes</a>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand-area">
+      <img class="logo" src="assets/filazero-logo.svg" alt="Filazero">
+      <span>Navegação horizontal · A2 aprovado</span>
+    </div>
+    <div class="v-top-right">
+      <a class="v-cross" href="variantes-etapas.html">Card de etapa <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+      <a class="v-cross" href="variantes.html">Card de conclusão <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+      <a class="v-open" href="index.html#etapa-2">Abrir protótipo <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main class="v-main" id="variantes">
+  <div class="v-intro">
+    <div>
+      <p class="eyebrow">Carteira de Jornadas · navegação horizontal</p>
+      <h1>O trilho de cards, com o recorte aprovado.</h1>
+      <p class="v-lede">A faixa que abre cada etapa e a linha de apoio logo abaixo. A estrutura segue <strong>A · trilho de cards</strong>, com a paleta <strong>C · Lilás preenchido</strong> — e o recorte do próximo card está decidido: <strong>A2 · Snap + indicador</strong>. Dois cards inteiros por vez, rolagem que para sempre no começo de um card, sem dica de gesto e com um indicador de cinco segmentos na linha de apoio. É assim que o protótipo abre agora. A1 e A3 continuam registradas como alternativas, a um parâmetro de distância. Cada recorte aparece na largura da coluna do protótipo (650 px) e num container de 390 px; as seis estruturas avaliadas ficam no arquivo, abaixo. O estado é sempre o mesmo: etapa 1 concluída, etapa 2 atual, 3 a 5 em repouso.</p>
+    </div>
+    <aside class="v-diagnosis" aria-labelledby="diagnosis-title">
+      <h2 id="diagnosis-title">O que motivou a escolha</h2>
+      <ol>
+        <li><b>01</b><span><strong>O card seguinte perde o número e o fim do nome.</strong> Com 390 px, o terceiro card aparecia cortado no meio do rótulo e o quarto virava um risco de 12 px na borda — o olho tenta ler o que não existe.</span></li>
+        <li><b>02</b><span><strong>Três sinais para a mesma ação.</strong> O corte, as setas e a dica “Deslize para explorar as etapas” disputavam a mesma instrução — e a dica continuava na tela mesmo quando a faixa não rolava.</span></li>
+        <li><b>03</b><span><strong>O recorte não é o único jeito de dizer que há mais.</strong> Um peek que termina no fim do nome, um indicador de progresso ou um contador de janela resolvem o mesmo problema com menos ruído.</span></li>
+      </ol>
+    </aside>
+  </div>
+
+  <div class="v-status">
+    <p class="is-on">Decidido: <strong>A · Trilho de cards</strong> com o recorte <strong>A2 · Snap + indicador</strong>. O protótipo já abre assim — o padrão está no próprio documento, não em nada salvo no navegador. <strong>?nav=</strong> continua como override para comparar (a–i), e a prancha mantém os três recortes lado a lado.</p>
+  </div>
+
+  <div class="v-legend">
+    <p class="eyebrow">Estrutura A · o recorte aprovado</p>
+    <p>Mesmo trilho, mesma paleta · texto 15,8:1 · barras e números 3:1</p>
+  </div>
+
+  <div class="v-grid v-grid-wide">
+    <article class="v-item" data-item="g">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">A1</span>
+        <div class="v-name"><h2>Peek limpo</h2><span class="v-tag">Alternativa</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#f3e9ff" title="Trilho"></span><span class="v-swatch" style="background:#ffffff" title="Card"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Visíveis</dt><dd>2+1</dd></div><div class="v-stat"><dt>Peek</dt><dd>105</dd></div><div class="v-stat"><dt>Faixa</dt><dd>74</dd></div><div class="v-stat"><dt>Corta</dt><dd>nada</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="g">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · as cinco cabem, sem peek</p>
+        <div class="v-rail" role="img" aria-label="Recorte A1, peek limpo, 650 px: as cinco etapas cabem no trilho, etapa 2 atual, com contador e setas abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · dois cards + etapa 3 legível</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Recorte A1, peek limpo, 390 px: dois cards inteiros e a etapa 3 com número e nome completos; o corte cai depois do nome."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Dois cards inteiros e a etapa seguinte legível: o terceiro card entra até o fim do nome e o corte cai no vazio depois dele — nada de número sem par ou palavra pela metade. A dica de gesto sai; contador e setas continuam. Custo: em vez dos 2,8 cards do trilho antigo, você vê dois inteiros e a próxima etapa completa. Ficou como alternativa — o padrão é A2.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=g#etapa-2" aria-label="Ver o recorte A1, Peek limpo, no protótipo">Ver A1 no protótipo</a></div>
+    </article>
+    <article class="v-item is-applied" data-item="h">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">A2</span>
+        <div class="v-name"><h2>Snap + indicador</h2><span class="v-tag">Progresso</span><span class="v-applied">Padrão aprovado</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#f3e9ff" title="Trilho"></span><span class="v-swatch" style="background:#ffffff" title="Card"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Visíveis</dt><dd>2</dd></div><div class="v-stat"><dt>Indicador</dt><dd>5</dd></div><div class="v-stat"><dt>Faixa</dt><dd>74</dd></div><div class="v-stat"><dt>Corta</dt><dd>nada</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="h">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · as cinco cabem; o indicador fica</p>
+        <div class="v-rail" role="img" aria-label="Recorte A2, snap com indicador, 650 px: as cinco etapas cabem, etapa 2 atual, indicador de cinco segmentos abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-progress" aria-hidden="true"><i class="done"></i><i class="now"></i><i></i><i></i><i></i></span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · dois cards inteiros + indicador</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Recorte A2, snap com indicador, 390 px: dois cards inteiros, sem recorte, e o indicador de cinco segmentos marcando a etapa 2."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-progress" aria-hidden="true"><i class="done"></i><i class="now"></i><i></i><i></i><i></i></span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">É o padrão: dois cards inteiros por vez, com snap — a rolagem para sempre no começo de um card, então não existe meio card na borda. No lugar da dica, um indicador de cinco segmentos mostra onde você está e quanto falta; as setas seguem como único controle explícito. Custo: menos etapas visíveis; ganho: cards grandes e nenhum recorte.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html#etapa-2" aria-label="Abrir o protótipo com o recorte aprovado, Snap + indicador">Abrir o protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="i">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">A3</span>
+        <div class="v-name"><h2>Sem corte</h2><span class="v-tag">Densidade</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#f3e9ff" title="Trilho"></span><span class="v-swatch" style="background:#ffffff" title="Card"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Visíveis</dt><dd>3</dd></div><div class="v-stat"><dt>Janela</dt><dd>1–3</dd></div><div class="v-stat"><dt>Faixa</dt><dd>74</dd></div><div class="v-stat"><dt>Corta</dt><dd>nada</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="i">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · as cinco cabem, sem janela</p>
+        <div class="v-rail" role="img" aria-label="Recorte A3, sem corte, 650 px: as cinco etapas cabem no trilho, etapa 2 atual, com contador e setas abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · três cards inteiros</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Recorte A3, sem corte, 390 px: três cards inteiros sem nenhum recorte, com o contador de janela Etapas 1 a 3 de 5."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-counter">Etapas 1–3 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Três cards inteiros por vez, sem rolagem parcial: o contador vira janela — “Etapas 1–3 de 5” — e as setas movem a etapa atual, que puxa a janela junto. É a maior densidade sem nenhum corte. Custo: some a pista visual de que existe um quarto card; quem conta a história é o contador. Ficou como alternativa — o padrão é A2.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=i#etapa-2" aria-label="Ver o recorte A3, Sem corte, no protótipo">Ver A3 no protótipo</a></div>
+    </article>
+  </div>
+
+  <div class="v-legend v-sep">
+    <p class="eyebrow">Arquivo · as seis estruturas avaliadas</p>
+    <p>A estrutura escolhida foi A · trilho de cards; o recorte, A2 · Snap + indicador. As demais ficam registradas.</p>
+  </div>
+
+  <div class="v-grid v-grid-wide">
+    <article class="v-item is-applied" data-item="a">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">A</span>
+        <div class="v-name"><h2>Trilho de cards</h2><span class="v-tag">Estrutura</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#f3e9ff" title="Trilho"></span><span class="v-swatch" style="background:#ffffff" title="Card"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Faixa</dt><dd>74</dd></div><div class="v-stat"><dt>Texto</dt><dd>15,8</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,7</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="a">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · coluna do protótipo</p>
+        <div class="v-rail" role="img" aria-label="Variante A, trilho de cards, 650 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · celular</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Variante A, trilho de cards, 390 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Referência da forma que ancora o padrão: cartões altos, número em pastilha, duas linhas de texto e trilho rolável no celular. Ganha na legibilidade do nome; perde em densidade — no celular, menos de três etapas ficam visíveis por vez. O recorte aplicado sobre essa base é o A2.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=a#etapa-2" aria-label="Ver a variante A, Trilho de cards, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="b">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">B</span>
+        <div class="v-name"><h2>Linha do tempo</h2><span class="v-tag">Progresso</span><span class="v-applied"></span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#dccdf0" title="Trecho futuro"></span><span class="v-swatch" style="background:#8c27ff" title="Trecho percorrido"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Faixa</dt><dd>64</dd></div><div class="v-stat"><dt>Nome</dt><dd>7,0</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,7</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="b">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · coluna do protótipo</p>
+        <div class="v-rail" role="img" aria-label="Variante B, linha do tempo, 650 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · celular</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Variante B, linha do tempo, 390 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Sem moldura: os números ficam sobre uma linha contínua, com o trecho percorrido em roxo, e o nome da etapa embaixo. As cinco cabem no celular sem rolagem. Ganha leveza e leitura de progresso; perde a área de toque do cartão inteiro — o alvo passa a ser a coluna, ainda com 64 px de altura.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=b#etapa-2" aria-label="Ver a variante B, Linha do tempo, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="c">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">C</span>
+        <div class="v-name"><h2>Chips compactos</h2><span class="v-tag">Densidade</span><span class="v-applied"></span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#ffffff" title="Chip"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span><span class="v-swatch" style="background:#edf6f2" title="Concluído"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Faixa</dt><dd>44</dd></div><div class="v-stat"><dt>Nome</dt><dd>6,2</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,7</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="c">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · coluna do protótipo</p>
+        <div class="v-rail" role="img" aria-label="Variante C, chips compactos, 650 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · celular</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Variante C, chips compactos, 390 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Uma linha só: número em pastilha e nome. A faixa cai de 62 para 44 px e o “Etapa N” sai do olho, mas continua no nome acessível. No celular rola com snap e mostra três chips por vez. Ganha densidade; perde a hierarquia de duas linhas.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=c#etapa-2" aria-label="Ver a variante C, Chips compactos, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="d">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">D</span>
+        <div class="v-name"><h2>Atual em destaque</h2><span class="v-tag">Foco</span><span class="v-applied"></span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#f3e9ff" title="Etapa em repouso"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span><span class="v-swatch" style="background:#e3f2ea" title="Concluída"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Faixa</dt><dd>68</dd></div><div class="v-stat"><dt>Número</dt><dd>13,3</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,7</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="d">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · coluna do protótipo</p>
+        <div class="v-rail" role="img" aria-label="Variante D, atual em destaque, 650 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · celular</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Variante D, atual em destaque, 390 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Só a etapa atual mostra o rótulo inteiro; as outras viram círculos com o número. Cabe no celular sem rolagem e a posição salta à vista. Ganha foco; perde o nome das etapas vizinhas — os números só dizem algo depois do toque.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=d#etapa-2" aria-label="Ver a variante D, Atual em destaque, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="e">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">E</span>
+        <div class="v-name"><h2>Paginada</h2><span class="v-tag">Uma por vez</span><span class="v-applied"></span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#32006b" title="Atual"></span><span class="v-swatch" style="background:#8c27ff" title="Número"></span><span class="v-swatch" style="background:#746779" title="Contador"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Faixa</dt><dd>74</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Número</dt><dd>5,5</dd></div><div class="v-stat"><dt>Contador</dt><dd>5,0</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="e">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · coluna do protótipo</p>
+        <div class="v-rail" role="img" aria-label="Variante E, paginada, 650 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · celular</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Variante E, paginada, 390 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 de 5</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">A faixa mostra apenas a etapa atual, grande, e a linha de apoio assume a posição: “Etapa 2 de 5”. Zero rolagem em qualquer largura, com setas e teclado para trocar. Ganha foco total; perde a visão do conjunto.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=e#etapa-2" aria-label="Ver a variante E, Paginada, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="f">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">F</span>
+        <div class="v-name"><h2>Barra navegável</h2><span class="v-tag">Produto</span><span class="v-applied"></span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#9d84bf" title="Futuro"></span><span class="v-swatch" style="background:#8c27ff" title="Concluído"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Faixa</dt><dd>44</dd></div><div class="v-stat"><dt>Futuro</dt><dd>3,1</dd></div><div class="v-stat"><dt>Concluído</dt><dd>5,2</dd></div><div class="v-stat"><dt>Atual</dt><dd>14,8</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-nav="f">
+        <div class="v-samples">
+      <div class="v-preview">
+        <p class="v-preview-label">650 px · coluna do protótipo</p>
+        <div class="v-rail" role="img" aria-label="Variante F, barra navegável, 650 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 · Atendimentos</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div>
+      </div>
+      <div class="v-preview">
+        <p class="v-preview-label">390 px · celular</p>
+        <div class="v-narrow"><div class="v-rail" role="img" aria-label="Variante F, barra navegável, 390 px: etapa 1 concluída, etapa 2 atual, etapas 3 a 5 em repouso. Dica e setas de etapa abaixo."><div class="tabs many"><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div><div class="stage-meta"><span class="nav-hint">Deslize para explorar as etapas</span><span class="nav-counter">Etapa 2 · Atendimentos</span><div class="step-controls"><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></span><span class="icon-button"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></div></div></div></div>
+      </div>
+        </div>
+      </div>
+      <p class="v-note">Cinco segmentos de 8 px com área de toque de 44 px, coloridos por estado. A faixa inteira cabe em 44 px e o nome da etapa atual aparece na linha de apoio. Ganha compactação e cara de produto; perde número e nome dentro da barra — a leitura depende do rótulo abaixo.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?nav=f#etapa-2" aria-label="Ver a variante F, Barra navegável, no protótipo">Ver no protótipo</a></div>
+    </article>
+  </div>
+
+  <aside class="v-reco">
+    <span class="v-reco-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span>
+    <p><strong>A2 é o padrão.</strong> O protótipo abre com o trilho A, dois cards inteiros por vez, snap no começo de cada card e o indicador de cinco segmentos marcando onde você está — sem a dica de gesto e sem nada salvo no navegador. A1 e A3 continuam a um parâmetro de distância: <strong>?nav=g</strong>, <strong>h</strong> e <strong>i</strong> mostram cada recorte no celular. Se o recorte voltar a incomodar, o caminho é comparar de novo nesta prancha — a estrutura do trilho fica como está.</p>
+  </aside>
+</main>
+</body>
+</html>

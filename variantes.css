@@ -1,0 +1,189 @@
+/* Prancha de teste — variantes de cor do card de etapa concluída.
+   Herda tokens, fontes e a barra superior de styles.css. */
+
+.v-main { max-width: 1216px; margin: auto; padding: 44px 32px 88px; }
+
+/* —— Abertura —— */
+.v-intro { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-bottom: 28px; }
+.v-intro h1 { font-size: 46px; line-height: 1.04; letter-spacing: -.035em; margin: 10px 0 16px; max-width: 12em; }
+.v-lede { font-size: 14px; line-height: 1.65; color: #5b4d68; max-width: 58ch; }
+
+.v-diagnosis { background: var(--pale); border: 1px solid #e3d3fa; border-radius: 16px; padding: 20px 22px; }
+.v-diagnosis h2 { font-size: 14px; letter-spacing: -.01em; }
+.v-diagnosis ol { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 12px; }
+.v-diagnosis li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 8px; font-size: 12px; line-height: 1.5; color: #4a3b58; }
+.v-diagnosis li b { font-family: Mono, monospace; font-size: 10px; color: #6b1fd0; padding-top: 2px; }
+.v-diagnosis li strong { color: var(--dark); font-weight: 600; }
+
+/* —— Estado da aplicação —— */
+.v-status { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 12px 2px 22px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+.v-status p { font-size: 12px; color: #5b4d68; display: flex; align-items: center; gap: 8px; }
+.v-status p::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #b9a9c6; flex: none; }
+.v-status p.is-on::before { background: var(--green); }
+.v-status button { border: 1px solid var(--line); background: #fff; border-radius: 30px; min-height: 44px; padding: 0 14px; font-size: 11px; font-weight: 600; color: var(--dark); }
+.v-status button:hover { background: var(--pale); border-color: #e0cdf8; }
+
+/* —— Régua de medição —— */
+.v-legend { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.v-legend p { font-size: 11px; color: var(--muted); }
+
+/* —— Grade de variantes —— */
+.v-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(560px, 1fr)); gap: 24px; }
+.v-item { display: flex; flex-direction: column; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.v-item.is-applied { border-color: #cdb2f2; box-shadow: 0 0 0 3px #8c27ff14; }
+
+.v-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; align-items: center; }
+.v-letter { width: 30px; height: 30px; border-radius: 9px; background: var(--pale); color: var(--dark); display: grid; place-items: center; font-family: Mono, monospace; font-size: 12px; font-weight: 700; }
+.v-name { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.v-name h2 { font-size: 17px; line-height: 1.2; letter-spacing: -.02em; }
+.v-tag { font-family: Mono, monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 20px; padding: 2px 7px; }
+.v-applied { display: none; font-family: Mono, monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--dark); border-radius: 20px; padding: 3px 8px; }
+.v-item.is-applied .v-applied { display: inline-flex; }
+
+.v-swatches { grid-column: 1 / -1; display: flex; align-items: center; gap: 5px; }
+.v-swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #291d381f; }
+
+.v-stats { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+.v-stat { display: grid; gap: 1px; background: var(--paper); border: 1px solid #efe9f4; border-radius: 8px; padding: 5px 9px; min-width: 72px; }
+.v-stat dt { font-family: Mono, monospace; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.v-stat dd { margin: 0; font-family: Mono, monospace; font-size: 13px; font-weight: 700; color: var(--ink); }
+
+/* —— Amostra: mesmo chão do protótipo —— */
+.v-stage { background: var(--paper); border: 1px solid #efe9f4; border-radius: 14px; padding: 14px; }
+.v-stage .finished-banner { margin: 0; }
+
+.v-note { font-size: 12px; line-height: 1.55; color: #5b4d68; }
+.v-foot { margin-top: auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.v-apply { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 30px; background: #fff; color: var(--dark); font-size: 11px; font-weight: 600; }
+a.v-apply { text-decoration: none; }
+.v-apply.is-default { background: var(--pale); border-color: #cdb2f2; color: var(--dark); cursor: default; }
+.v-apply:hover { background: var(--pale); border-color: #e0cdf8; }
+.v-apply[aria-pressed="true"] { background: var(--dark); border-color: var(--dark); color: #fff; }
+.v-apply[aria-pressed="true"]:hover { background: #4a1a8f; }
+.v-apply .od-icon { --od-icon-size: 14px; }
+
+/* —— Recomendação —— */
+.v-reco { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: start; margin-top: 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; }
+.v-reco-icon { width: 34px; height: 34px; border-radius: 10px; background: var(--pale); color: var(--dark); display: grid; place-items: center; }
+.v-reco p { font-size: 13px; line-height: 1.6; color: #4a3b58; }
+.v-reco strong { color: var(--ink); }
+
+/* —— Barra superior —— */
+.v-top-right { display: flex; align-items: center; gap: 12px; }
+.v-open { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 15px; border-radius: 30px; background: var(--dark); color: #fff; font-size: 11px; font-weight: 600; text-decoration: none; }
+.v-open:hover { background: #4a1a8f; }
+.v-open .od-icon { --od-icon-size: 14px; }
+
+/* —— Responsivo —— */
+@media (max-width: 1100px) {
+  .v-main { max-width: 780px; }
+  .v-intro { grid-template-columns: 1fr; gap: 24px; }
+  .v-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .v-main { padding: 26px 18px 64px; }
+  .v-intro h1 { font-size: 33px; }
+  .v-lede { font-size: 13px; }
+  .v-diagnosis { padding: 17px 18px; }
+  .v-item { padding: 14px; gap: 12px; }
+  .v-stage { padding: 10px; }
+  .v-name h2 { font-size: 16px; }
+  .v-status { padding-bottom: 18px; }
+  .v-open { min-height: 38px; padding: 0 13px; }
+  .v-reco { grid-template-columns: 1fr; gap: 10px; }
+}
+@media (max-width: 400px) {
+  .v-stats { gap: 5px; }
+  .v-stat { flex: 1 1 0; min-width: 0; padding: 5px 7px; }
+  .v-stat dd { font-size: 12px; }
+  .v-stage { padding: 8px; }
+}
+
+#v-toast { bottom: 24px; }
+
+/* —— Prancha do card de etapa (abas) ——
+   Reaproveita o layout .v-* acima; aqui ficam só as amostras do trilho de etapas. */
+.v-grid-wide { grid-template-columns: 1fr; gap: 20px; }
+.v-grid-wide .v-item { width: 100%; max-width: 780px; margin-inline: auto; }
+.v-samples { display: grid; gap: 14px; justify-items: center; }
+.v-rail { width: 100%; max-width: 650px; display: grid; gap: 7px; }
+.v-rail-label { font-family: Mono, monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.v-rail .tabs { margin: 0; }
+.v-rail .tabs .tab { cursor: default; }
+.v-rail--fragment { max-width: 430px; }
+.v-rail--fragment .tab { flex: 1 1 0; }
+.v-rail .tab .step-number .od-icon { width: 15px; height: 15px; }
+
+/* —— Atalho cruzado entre as duas pranchas —— */
+.v-cross { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 30px; background: #fff; color: var(--dark); font-size: 11px; font-weight: 600; text-decoration: none; }
+.v-cross:hover { background: var(--pale); border-color: #e0cdf8; }
+.v-cross .od-icon { --od-icon-size: 14px; }
+
+@media (max-width: 1100px) {
+  .v-rail { max-width: 100%; }
+}
+@media (max-width: 760px) {
+  .v-rail--fragment { max-width: 100%; }
+  .v-grid-wide .v-item { padding: 14px; }
+  .v-cross { display: none; }
+}
+@media (max-width: 430px) {
+  .v-rail--fragment { max-width: 100%; }
+}
+
+/* —— Prancha da navegação horizontal ——
+   Cada variante aparece na largura da coluna do protótipo (650px) e dentro de
+   um container de 390px. O container reproduz, por container query, as mesmas
+   regras que o @media 960 do styles.css aplica no celular real. */
+.v-samples { gap: 18px; }
+.v-preview { display: grid; gap: 7px; justify-items: center; width: 100%; }
+.v-preview-label { font-family: Mono, monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.v-narrow { width: 390px; max-width: 100%; padding: 18px; border: 1px solid #e7e1ed; border-radius: 16px; background: var(--paper); container-type: inline-size; container-name: v-nav; }
+.v-narrow .v-rail { max-width: 100%; }
+.v-preview .stage-meta { margin-top: 0; }
+.v-preview .tabs .tab,
+.v-preview .icon-button { cursor: default; }
+
+@container v-nav (max-width: 480px) {
+  /* A · reproduz o trilho rolável e a tipografia de 760px do protótipo */
+  .v-stage[data-stage-nav="a"] .v-narrow .tabs { padding: 4px; gap: 3px; border-radius: 15px; }
+  .v-stage[data-stage-nav="a"] .v-narrow .tabs.many .tab { flex: 1 0 124px; padding: 8px 10px; gap: 7px; min-height: 60px; }
+  .v-stage[data-stage-nav="a"] .v-narrow .tabs .tab .step-number { width: 23px; height: 23px; font-size: 10px; }
+  .v-stage[data-stage-nav="a"] .v-narrow .tabs .tab .tab-text { font-size: 11px; }
+  .v-stage[data-stage-nav="a"] .v-narrow .tabs .tab small { font-size: 9px; }
+  /* B · cinco colunas sem rolagem, nome em 9,5px */
+  .v-stage[data-stage-nav="b"] .v-narrow .tabs.many .tab { flex: 1 1 0; min-width: 0; padding: 0; }
+  .v-stage[data-stage-nav="b"] .v-narrow .tabs .tab .tab-text small { font-size: 9.5px; letter-spacing: -.02em; }
+  /* C · três chips por vez, com snap */
+  .v-stage[data-stage-nav="c"] .v-narrow .tabs.many .tab { flex: 0 0 112px; min-width: 112px; padding: 0 12px; }
+  /* D · círculos de 44px e a etapa atual ocupando o resto */
+  .v-stage[data-stage-nav="d"] .v-narrow .tabs.many .tab { flex: 0 0 auto; }
+  .v-stage[data-stage-nav="d"] .v-narrow .tabs.many .tab[aria-selected="true"] { flex: 1 1 auto; width: auto; min-width: 0; height: 64px; padding: 0 12px; gap: 10px; }
+  .v-stage[data-stage-nav="d"] .v-narrow .tabs .tab[aria-selected="true"] .tab-text { font-size: 11px; }
+  .v-stage[data-stage-nav="d"] .v-narrow .tabs .tab[aria-selected="true"] .step-number { width: 28px; height: 28px; }
+  /* E · a etapa atual ocupa a faixa inteira */
+  .v-stage[data-stage-nav="e"] .v-narrow .tabs.many .tab[aria-selected="true"] { flex: 1 1 100%; width: 100%; }
+  /* F · cinco segmentos de 8px */
+  .v-stage[data-stage-nav="f"] .v-narrow .tabs.many .tab { flex: 1 1 0; min-width: 0; padding: 18px 2px; }
+  /* G–I · mesma tipografia de 760px do protótipo */
+  .v-stage:is([data-stage-nav="g"],[data-stage-nav="h"],[data-stage-nav="i"]) .v-narrow .tabs { padding: 4px; gap: 3px; border-radius: 15px; }
+  .v-stage:is([data-stage-nav="g"],[data-stage-nav="h"],[data-stage-nav="i"]) .v-narrow .tabs.many .tab { min-height: 60px; gap: 7px; }
+  .v-stage:is([data-stage-nav="g"],[data-stage-nav="h"],[data-stage-nav="i"]) .v-narrow .tabs .tab .step-number { width: 23px; height: 23px; font-size: 10px; }
+  .v-stage:is([data-stage-nav="g"],[data-stage-nav="h"],[data-stage-nav="i"]) .v-narrow .tabs .tab .tab-text { font-size: 11px; }
+  .v-stage:is([data-stage-nav="g"],[data-stage-nav="h"],[data-stage-nav="i"]) .v-narrow .tabs .tab small { font-size: 9px; }
+  /* G · dois cards inteiros + a etapa 3 legível; o corte cai depois do nome */
+  .v-stage[data-stage-nav="g"] .v-narrow .tabs.many .tab { flex: 0 0 calc((100% - 6px - 105px) / 2); padding: 8px 7px; }
+  /* H · dois cards inteiros, sem recorte */
+  .v-stage[data-stage-nav="h"] .v-narrow .tabs.many .tab { flex: 0 0 calc((100% - 3px) / 2); padding: 8px; }
+  /* I · três cards inteiros, sem recorte */
+  .v-stage[data-stage-nav="i"] .v-narrow .tabs.many .tab { flex: 0 0 calc((100% - 6px) / 3); padding: 8px 7px; }
+}
+
+/* —— Separação entre o recorte em avaliação e o arquivo das estruturas —— */
+.v-sep { margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--line); }
+
+/* Três atalhos no topo: some o subtítulo da marca antes de faltar espaço. */
+.v-top-right { justify-content: flex-end; }
+@media (max-width: 900px) {
+  .brand-area > span { display: none; }
+}

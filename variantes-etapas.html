@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27/%3E">
+<meta name="theme-color" content="#32006b">
+<title>Variantes do card de etapa · Filazero</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="variantes.css">
+</head>
+<body>
+<a class="skip" href="#variantes">Ir para as variantes</a>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand-area">
+      <img class="logo" src="assets/filazero-logo.svg" alt="Filazero">
+      <span>Teste de cor · card de etapa</span>
+    </div>
+    <div class="v-top-right">
+      <a class="v-cross" href="variantes.html">Card de conclusão <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+      <a class="v-cross" href="variantes-navegacao.html">Navegação horizontal <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+      <a class="v-open" id="open-proto" href="index.html#etapa-2">Abrir protótipo <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main class="v-main" id="variantes">
+  <div class="v-intro">
+    <div>
+      <p class="eyebrow">Carteira de Jornadas · etapa atual</p>
+      <h1>O card de etapa em seis tratamentos.</h1>
+      <p class="v-lede">As cinco peças que abrem cada etapa — mesmo texto, mesma diagramação, seis decisões de cor para o trilho, para o card atual e para o check de concluído. A variante <strong>C · Lilás preenchido</strong> é a que está no protótipo agora; as outras cinco seguem aqui para comparação e podem ser abertas por URL. Cada amostra usa a largura real da coluna do protótipo (650px) e mostra a etapa 2 em andamento sobre a etapa 1 concluída; a segunda faixa mostra o caso em que a etapa concluída é a selecionada. Os números são o contraste medido de cada estado.</p>
+    </div>
+    <aside class="v-diagnosis" aria-labelledby="diagnosis-title">
+      <h2 id="diagnosis-title">O que estava estranho</h2>
+      <ol>
+        <li><b>01</b><span><strong>Três linguagens na mesma linha.</strong> Card inativo branco sobre trilho branco, card atual em bloco roxo e concluído em check verde — nada ligava os três estados.</span></li>
+        <li><b>02</b><span><strong>O contorno quase não existia.</strong> A borda do card inativo media 1,48:1 contra o trilho; a etapa em repouso lia como um vão vazio.</span></li>
+        <li><b>03</b><span><strong>O círculo sumia no card atual.</strong> O roxo vivo do número contra o roxo profundo do card media 2,86:1 — o marcador perdia a forma justamente no estado mais importante.</span></li>
+      </ol>
+    </aside>
+  </div>
+
+  <div class="v-status">
+    <p class="is-on">C · Lilás preenchido é o padrão do protótipo. As outras variantes continuam disponíveis para comparação — o botão abre o protótipo com a variante na URL.</p>
+  </div>
+
+  <div class="v-legend">
+    <p class="eyebrow">Amostras com o markup real · AA para texto = 4,5:1</p>
+    <p>Check e número contam como elemento gráfico: 3:1</p>
+  </div>
+
+  <div class="v-grid v-grid-wide">
+    <article class="v-item" data-item="a">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">A</span>
+        <div class="v-name"><h2>Atual</h2><span class="v-tag">Referência</span><span class="v-applied">Padrão</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#ffffff" title="Trilho"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span><span class="v-swatch" style="background:#8c27ff" title="Acento"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Inativa</dt><dd>15,8</dd></div><div class="v-stat"><dt>Nome</dt><dd>5,3</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>5,1</dd></div><div class="v-stat"><dt>Número</dt><dd>5,5</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-tab="a">
+        <div class="v-samples">
+          <div class="v-rail"><p class="v-rail-label">Etapa 2 em andamento</p><div class="tabs many" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída, Etapa 2 Atendimentos em andamento, Etapas 3 a 5 em repouso."><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div></div>
+          <div class="v-rail v-rail--fragment"><p class="v-rail-label">Etapa 1 concluída e selecionada</p><div class="tabs" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída e selecionada, Etapa 2 Atendimentos em repouso, Etapa 3 Exames em repouso."><span class="tab finished" aria-selected="true"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="false"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span></div></div>
+        </div>
+      </div>
+      <p class="v-note">O desenho anterior. O card atual vira um bloco roxo-escuro, o círculo do número fica roxo vivo e a etapa concluída troca para o check verde. Serve como referência do problema.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?etapa=a#etapa-2" aria-label="Ver a variante A, Atual, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="b">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">B</span>
+        <div class="v-name"><h2>Papel com contorno</h2><span class="v-tag">Contorno</span><span class="v-applied">Padrão</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#ffffff" title="Trilho"></span><span class="v-swatch" style="background:#f6efff" title="Atual"></span><span class="v-swatch" style="background:#8c27ff" title="Acento"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Inativa</dt><dd>15,8</dd></div><div class="v-stat"><dt>Nome</dt><dd>5,3</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,7</dd></div><div class="v-stat"><dt>Número</dt><dd>15,6</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-tab="b">
+        <div class="v-samples">
+          <div class="v-rail"><p class="v-rail-label">Etapa 2 em andamento</p><div class="tabs many" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída, Etapa 2 Atendimentos em andamento, Etapas 3 a 5 em repouso."><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div></div>
+          <div class="v-rail v-rail--fragment"><p class="v-rail-label">Etapa 1 concluída e selecionada</p><div class="tabs" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída e selecionada, Etapa 2 Atendimentos em repouso, Etapa 3 Exames em repouso."><span class="tab finished" aria-selected="true"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="false"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span></div></div>
+        </div>
+      </div>
+      <p class="v-note">O card atual deixa de ser um bloco: ganha contorno roxo de 2px e sombra leve, com o número em roxo profundo. O trilho fica claro e o verde aparece só no check.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?etapa=b#etapa-2" aria-label="Ver a variante B, Papel com contorno, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item is-applied" data-item="c">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">C</span>
+        <div class="v-name"><h2>Lilás preenchido</h2><span class="v-tag">Padrão</span><span class="v-applied">Padrão</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#f3e9ff" title="Trilho"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span><span class="v-swatch" style="background:#d8c2f5" title="Acento"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Inativa</dt><dd>15,8</dd></div><div class="v-stat"><dt>Nome</dt><dd>6,2</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,7</dd></div><div class="v-stat"><dt>Número</dt><dd>5,5</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-tab="c">
+        <div class="v-samples">
+          <div class="v-rail"><p class="v-rail-label">Etapa 2 em andamento</p><div class="tabs many" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída, Etapa 2 Atendimentos em andamento, Etapas 3 a 5 em repouso."><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div></div>
+          <div class="v-rail v-rail--fragment"><p class="v-rail-label">Etapa 1 concluída e selecionada</p><div class="tabs" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída e selecionada, Etapa 2 Atendimentos em repouso, Etapa 3 Exames em repouso."><span class="tab finished" aria-selected="true"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="false"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span></div></div>
+        </div>
+      </div>
+      <p class="v-note">O trilho inteiro vira lilás, os cards ficam brancos e o atual volta ao roxo profundo. A etapa concluída e selecionada usa uma pastilha lilás clara com check escuro.</p>
+      <div class="v-foot"><span class="v-apply is-default">Padrão aprovado</span></div>
+    </article>
+    <article class="v-item" data-item="d">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">D</span>
+        <div class="v-name"><h2>Número sólido</h2><span class="v-tag">Marcador</span><span class="v-applied">Padrão</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#ffffff" title="Trilho"></span><span class="v-swatch" style="background:#32006b" title="Atual"></span><span class="v-swatch" style="background:#d8c2f5" title="Acento"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Inativa</dt><dd>15,8</dd></div><div class="v-stat"><dt>Nome</dt><dd>5,3</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>4,4</dd></div><div class="v-stat"><dt>Número</dt><dd>12,0</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-tab="d">
+        <div class="v-samples">
+          <div class="v-rail"><p class="v-rail-label">Etapa 2 em andamento</p><div class="tabs many" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída, Etapa 2 Atendimentos em andamento, Etapas 3 a 5 em repouso."><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div></div>
+          <div class="v-rail v-rail--fragment"><p class="v-rail-label">Etapa 1 concluída e selecionada</p><div class="tabs" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída e selecionada, Etapa 2 Atendimentos em repouso, Etapa 3 Exames em repouso."><span class="tab finished" aria-selected="true"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="false"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span></div></div>
+        </div>
+      </div>
+      <p class="v-note">O marcador é sempre uma pastilha preenchida: lilás nas pendentes, lilás claro no atual, verde-claro no concluído. O card atual continua escuro, mas o número não desaparece.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?etapa=d#etapa-2" aria-label="Ver a variante D, Número sólido, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="e">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">E</span>
+        <div class="v-name"><h2>Segmentado</h2><span class="v-tag">App</span><span class="v-applied">Padrão</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#efe3ff" title="Trilho"></span><span class="v-swatch" style="background:#ffffff" title="Atual"></span><span class="v-swatch" style="background:#d8c2f5" title="Acento"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Inativa</dt><dd>12,9</dd></div><div class="v-stat"><dt>Nome</dt><dd>6,0</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>12,0</dd></div><div class="v-stat"><dt>Número</dt><dd>13,3</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-tab="e">
+        <div class="v-samples">
+          <div class="v-rail"><p class="v-rail-label">Etapa 2 em andamento</p><div class="tabs many" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída, Etapa 2 Atendimentos em andamento, Etapas 3 a 5 em repouso."><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div></div>
+          <div class="v-rail v-rail--fragment"><p class="v-rail-label">Etapa 1 concluída e selecionada</p><div class="tabs" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída e selecionada, Etapa 2 Atendimentos em repouso, Etapa 3 Exames em repouso."><span class="tab finished" aria-selected="true"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="false"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span></div></div>
+        </div>
+      </div>
+      <p class="v-note">Trilho lilás contínuo com o atual branco e elevado, como um segmented control. Quem concluiu ganha uma pastilha escura com check lilás — o estado fica legível sem bloco no card inteiro.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?etapa=e#etapa-2" aria-label="Ver a variante E, Segmentado, no protótipo">Ver no protótipo</a></div>
+    </article>
+    <article class="v-item" data-item="f">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">F</span>
+        <div class="v-name"><h2>Minimal com progresso</h2><span class="v-tag">Silencioso</span><span class="v-applied">Padrão</span></div>
+        <div class="v-swatches" aria-hidden="true"><span class="v-swatch" style="background:#ffffff" title="Trilho"></span><span class="v-swatch" style="background:#ffffff" title="Atual"></span><span class="v-swatch" style="background:#8c27ff" title="Acento"></span></div>
+        <dl class="v-stats"><div class="v-stat"><dt>Inativa</dt><dd>15,8</dd></div><div class="v-stat"><dt>Nome</dt><dd>5,3</dd></div><div class="v-stat"><dt>Atual</dt><dd>15,6</dd></div><div class="v-stat"><dt>Check</dt><dd>5,1</dd></div><div class="v-stat"><dt>Número</dt><dd>7,7</dd></div></dl>
+      </header>
+      <div class="v-stage" data-stage-tab="f">
+        <div class="v-samples">
+          <div class="v-rail"><p class="v-rail-label">Etapa 2 em andamento</p><div class="tabs many" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída, Etapa 2 Atendimentos em andamento, Etapas 3 a 5 em repouso."><span class="tab finished" aria-selected="false"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="true"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span><span class="tab" aria-selected="false"><span class="step-number">04</span><span class="tab-text">Etapa 4<small>Procedimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">05</span><span class="tab-text">Etapa 5<small>Encerramento</small></span></span></div></div>
+          <div class="v-rail v-rail--fragment"><p class="v-rail-label">Etapa 1 concluída e selecionada</p><div class="tabs" role="img" aria-label="Amostra da faixa de etapas: Etapa 1 Recepção concluída e selecionada, Etapa 2 Atendimentos em repouso, Etapa 3 Exames em repouso."><span class="tab finished" aria-selected="true"><span class="step-number"><svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span class="tab-text">Etapa 1<small>Recepção</small></span></span><span class="tab" aria-selected="false"><span class="step-number">02</span><span class="tab-text">Etapa 2<small>Atendimentos</small></span></span><span class="tab" aria-selected="false"><span class="step-number">03</span><span class="tab-text">Etapa 3<small>Exames</small></span></span></div></div>
+        </div>
+      </div>
+      <p class="v-note">Sem preenchimento: tipografia, número e uma barra de 2px na base de cada card marcam pendente, atual e concluído. O mais silencioso — bom se a faixa não deve competir com os atendimentos.</p>
+      <div class="v-foot"><a class="v-apply" href="index.html?etapa=f#etapa-2" aria-label="Ver a variante F, Minimal com progresso, no protótipo">Ver no protótipo</a></div>
+    </article>
+  </div>
+
+  <aside class="v-reco">
+    <span class="v-reco-icon" aria-hidden="true">
+      <svg class="od-icon" viewBox="0 0 24 24"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>
+    </span>
+    <p><strong>Escolha aplicada: C · Lilás preenchido.</strong> O trilho lilás separa a faixa do papel branco sem escurecer o card inteiro; o atual fica roxo profundo, as concluídas usam check verde e as demais leem como etapa disponível. B continua sendo a alternativa mais leve, e E a mais “app”, se em algum momento a faixa precisar mudar de caráter.</p>
+  </aside>
+</main>
+</body>
+</html>

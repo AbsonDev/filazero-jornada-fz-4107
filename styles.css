@@ -1,0 +1,621 @@
+/* OD-LAYOUT-PRIMITIVES v1 — structure only: display, flex/grid, overflow, wrapping, ratio, geometry.
+   Put this @layer first; product CSS outside the layer always wins. */
+@layer od-layout {
+  :where(.od-stack,.od-row,.od-row-top,.od-cluster,.od-grid,.od-field,.od-stat,.od-cell,.od-tile) > :where(*) { min-width: 0; }
+
+  /* containers */
+  .od-stack   { display: flex; flex-direction: column; gap: var(--od-gap, 8px); }
+  .od-row     { display: flex; align-items: center; gap: var(--od-gap, 8px); }
+  .od-row-top { display: flex; align-items: flex-start; gap: var(--od-gap, 8px); }
+  .od-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--od-gap, 8px); }
+  .od-fill    { flex: 1 1 0; min-width: 0; }
+  .od-fixed   { flex: none; }
+  .od-grid    { display: grid; gap: var(--od-gap, 12px); grid-template-columns: repeat(var(--od-cols, 3), minmax(0, 1fr)); }
+
+  /* stacked information: each piece is its own line — never sibling inline spans */
+  .od-stat, .od-field, .od-cell { display: grid; gap: var(--od-gap, 2px); }
+  :where(.od-stat,.od-field,.od-cell) > :where(*) { display: block; }
+  .od-tile { display: grid; grid-template-rows: auto 1fr; }
+  :where(.od-tile) > :where(*) { display: block; }
+
+  /* media keeps its intrinsic ratio by default; never a distorted or cropped
+     cover by accident. height:auto lets the ratio win over an <img height="…">
+     attribute. Cropping to a uniform box is an explicit opt-in: set --od-ratio
+     AND add .od-media-cover together (per the core rule, only where a crop is
+     deliberate — tile thumbs, decorative fills — never on full-frame content). */
+  .od-media { display: block; width: 100%; height: auto; aspect-ratio: var(--od-ratio, auto); }
+  .od-media-cover { object-fit: cover; }
+
+  /* functional inline SVG icons opt into bounded geometry; content SVGs keep their own */
+  .od-icon { display: inline-block; inline-size: var(--od-icon-size, 1em); block-size: var(--od-icon-size, 1em); flex: none; }
+
+  /* data text only — authored copy is rewritten to its budget instead */
+  .od-truncate { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .od-clamp-2, .od-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .od-clamp-2 { -webkit-line-clamp: 2; }
+  .od-clamp-3 { -webkit-line-clamp: 3; }
+  .od-lines-2 { min-height: calc(2 * 1.4em); }   /* block-level reservation for a shared baseline */
+  .od-nowrap  { white-space: nowrap; }           /* 数字+单位 · 价格+起 · 日期+星期 */
+  .od-keep    { word-break: keep-all; overflow-wrap: anywhere; } /* CJK labels break at spaces / <wbr> first */
+
+  /* screen skeleton (optional): bars take their own space, the middle scrolls — no padding guessed for chrome */
+  .od-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+  .od-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
+
+  /* horizontal rail: the next item peeks at the edge; trailing room survives overflow */
+  .od-rail { display: flex; gap: var(--od-gap, 8px); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+             padding-inline: var(--od-rail-pad, 16px); scroll-padding-inline: var(--od-rail-pad, 16px); }
+  .od-rail::-webkit-scrollbar { display: none; }
+  :where(.od-rail) > :where(*) { flex: none; scroll-snap-align: start; }
+  :where(.od-rail) > :where(:last-child) { margin-inline-end: var(--od-rail-pad, 16px); }
+
+  .od-spacer { flex: none; visibility: hidden; pointer-events: none; }
+  .od-touch  { min-width: 44px; min-height: 44px; }
+}
+/* /OD-LAYOUT-PRIMITIVES v1 */
+
+
+@font-face{font-family:Geist;font-weight:500;src:url("assets/fonts/geist-500.ttf") format("truetype")}@font-face{font-family:Geist;font-weight:600;src:url("assets/fonts/geist-600.ttf") format("truetype")}@font-face{font-family:Inter;font-weight:400;src:url("assets/fonts/inter-400.ttf") format("truetype")}@font-face{font-family:Inter;font-weight:500;src:url("assets/fonts/inter-500.ttf") format("truetype")}@font-face{font-family:Inter;font-weight:600;src:url("assets/fonts/inter-600.ttf") format("truetype")}@font-face{font-family:Mono;font-weight:500;src:url("assets/fonts/mono-500.ttf") format("truetype")}@font-face{font-family:Mono;font-weight:700;src:url("assets/fonts/mono-700.ttf") format("truetype")}
+:root{--purple:#8c27ff;--dark:#32006b;--pale:#f3e9ff;--ink:#291d38;--muted:#6f6275;--muted-spec:#786C83;--line:#e7e1ed;--green:#007d5c;--lilac:#d8c2f5;--lilac-strong:#a973ee;--paper:#faf8fc;--success-bg:#edf6f2;--success-border:#cfe9df;--success-ink:#3f5f52;--top-h:91px;--track:#93809f}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:Inter,Arial,sans-serif;color:var(--ink);font-size:14px;line-height:1.5}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button,a,input,textarea{outline-offset:4px}button:focus-visible,a:focus-visible{outline:3px solid var(--purple)}button{color:inherit}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:Geist,Arial,sans-serif;font-weight:600;letter-spacing:-.025em}.od-icon{display:inline-block;width:var(--od-icon-size,20px);height:var(--od-icon-size,20px);stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.mono{font-family:Mono,monospace;font-weight:500}.eyebrow{font-family:Mono,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}.muted{color:var(--muted)}.top{position:sticky;top:0;z-index:6;background:var(--purple);border-bottom:1px solid #7a1ce0}.top-inner{max-width:1216px;height:90px;padding:0 32px;margin:auto;display:flex;align-items:center;justify-content:space-between}.logo{height:32px;width:auto;display:block}.brand-area{display:flex;gap:38px;align-items:center}.brand-area>span{padding-left:30px;border-left:1px solid #ffffff40;font-size:13px;color:#f5ebff}.person .name{color:#fff}.person{display:flex;gap:12px;align-items:center}.avatar{width:38px;height:38px;border-radius:50%;background:#ffffff0f;color:#fff;display:grid;place-items:center;font-weight:600;border:1px solid #ffffff3d}.person small{display:block;color:#f5ebff;font-size:11px}.layout{max-width:1216px;padding:40px 32px 112px;margin:auto;display:grid;grid-template-columns:230px minmax(0,650px) 1fr;gap:44px}.aside{padding-top:7px}.clinic{display:flex;gap:12px;align-items:center;margin-bottom:36px}.clinic-icon{width:42px;height:42px;background:white;border:1px solid var(--line);border-radius:13px;display:grid;place-items:center;color:var(--purple)}.clinic strong{font-size:13px;font-weight:600}.clinic small{display:block;font-size:11px;color:var(--muted)}.aside-title{margin-bottom:14px;color:var(--muted)}.side-link{width:100%;border:0;background:none;text-align:left;display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;font-size:13px;margin-bottom:5px}.side-link.active{color:var(--dark);background:var(--pale);font-weight:600}.side-link .od-icon{--od-icon-size:18px}.visit{margin-top:44px;border-top:1px solid var(--line);padding-top:23px}.visit p{font-size:12px;margin-top:10px}.visit .mono{font-size:12px;color:var(--dark)}.side-bottom{margin-top:55px;color:var(--muted);max-width:175px;font-size:12px}.side-bottom .od-icon{color:var(--purple);margin-bottom:10px}.intro{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:25px}.intro .eyebrow{color:var(--purple);margin-bottom:9px}h1{font-size:36px;line-height:1.12}.intro p{margin-top:10px;color:var(--muted);font-size:13px}.journey-code{white-space:nowrap;flex-shrink:0;border:1px solid var(--line);background:white;padding:7px 12px;border-radius:30px;color:var(--dark);font-size:11px;margin-top:6px}.progress{margin:0 0 29px}.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}.progress-label strong{color:var(--ink);font-weight:500}.progress-track{display:flex;gap:5px}.progress-track span{height:4px;border-radius:8px;flex:1;background:var(--track)}.progress-track span.done{background:var(--purple)}.stage-navigation{position:sticky;top:var(--top-h);z-index:5;background:var(--paper);padding-top:6px;padding-bottom:15px}.tabs{display:flex;border:1px solid var(--line);padding:5px;border-radius:17px;background:white;gap:5px}.tab{flex:1;border:0;background:none;min-height:62px;border-radius:12px;text-align:left;padding:9px 12px;display:flex;gap:10px;align-items:center}.tab .step-number{border:1px solid #dcd0e8;border-radius:50%;width:27px;height:27px;display:grid;place-items:center;font-family:Mono;font-size:11px;flex-shrink:0}.tab .tab-text{font-size:12px;font-weight:500}.tab small{display:block;font-size:10px;font-weight:400;color:var(--muted);margin-top:2px}.tab[aria-selected=true]{background:var(--dark);color:white}.tab[aria-selected=true] small{color:#d8c2f5}.tab[aria-selected=true] .step-number{background:var(--purple);border-color:var(--purple)}.tab.finished .step-number{color:var(--green);border-color:#bee0d3}.tab.finished[aria-selected=true] .step-number{color:white}.stage-meta{display:flex;justify-content:space-between;align-items:center;margin-top:11px;color:var(--muted);font-size:11px}.step-controls{display:flex;align-items:center;gap:6px}.icon-button{border:1px solid var(--line);background:white;border-radius:50%;width:32px;height:32px;display:grid;place-items:center}.icon-button .od-icon{--od-icon-size:15px}#notice-container.has-call{position:sticky;top:calc(var(--top-h) + var(--stage-nav-h,139px) + 6px);z-index:4;background:var(--paper);padding-top:1px}.call-present .ticket{scroll-margin-top:calc(var(--top-h) + var(--stage-nav-h,139px) + var(--notice-h,0px) + 16px)}.notice{background:var(--dark);color:white;padding:15px 18px;border-radius:16px;margin:2px 0 22px;display:flex;align-items:center;gap:13px}.notice-icon{width:38px;height:38px;display:grid;place-items:center;background:#ffffff16;border:1px solid #ffffff24;border-radius:50%;color:var(--lilac);flex-shrink:0}.notice p{font-size:12px;color:#d8c2f5;margin-top:2px}.notice strong{font-weight:500;font-size:13px}.notice button{background:var(--lilac);color:var(--dark);border:0;min-height:36px;padding:7px 13px;border-radius:30px;font-size:11px;font-weight:600;margin-left:auto;white-space:nowrap}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;margin-top:5px}.section-title h2{font-size:21px}.section-title p{font-size:12px;color:var(--muted)}.card-list{display:flex;flex-direction:column;gap:13px}.ticket{background:white;border:1px solid var(--line);border-radius:21px;overflow:hidden;scroll-margin-top:calc(var(--top-h) + var(--stage-nav-h,139px) + 8px);box-shadow:0 3px 8px #32006b03;transition:border-color .2s,box-shadow .2s}.ticket.expanded{border-color:var(--purple);box-shadow:0 6px 22px #51039d0b}.ticket-top{width:100%;border:0;background:none;padding:19px 22px;display:flex;align-items:center;gap:14px;text-align:left}.ticket-info{flex:1;min-width:0}.ticket-info h3{font-size:17px;margin-top:4px}.ticket-info .eyebrow{font-size:11px;color:var(--muted);letter-spacing:.1em}.ticket-head-right{text-align:right}.status{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 8px;background:var(--pale);color:#6411b2;border-radius:20px;white-space:nowrap}.status.completed{background:var(--success-bg);color:var(--green)}.status.canceled,.status.future{color:#5f5268;background:#f1edf4}.status.skipped{color:#5f5268;background:#f1edf4}.status.confirmed{color:#4a1a8f;background:var(--pale)}.status.called{background:var(--lilac);color:var(--dark)}.status:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor}.chevron{color:#9f8cad;--od-icon-size:15px;transition:transform .2s}.expanded .chevron{transform:rotate(180deg)}.card-summary{padding:0 22px 17px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;color:var(--muted)}.card-summary .small-action{font-weight:500;color:var(--purple)}.ticket.expanded .ticket-top{background:var(--pale);padding-bottom:17px}.ticket.expanded .card-summary{background:var(--pale)}.ticket-detail{padding:21px 22px 22px;border-top:1px solid var(--line)}.queue-status{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}.queue-status h3{font-size:24px;line-height:1.2}.queue-status p{font-size:12px;color:var(--muted);margin-top:7px}.live{font-size:11px;color:var(--green);display:flex;align-items:center;gap:5px;white-space:nowrap;margin-top:6px}.live:before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green)}.numbers{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:14px;margin-bottom:18px}.number{padding:17px}.number+.number{border-left:1px solid var(--line)}.number .eyebrow{font-size:11px;color:var(--muted);letter-spacing:.09em}.number-value{font-family:Mono;font-size:30px;font-weight:700;line-height:1.3;color:var(--dark);margin:5px 0}.number-value small{font-family:Inter;font-weight:400;font-size:13px}.number p{font-size:12px;color:var(--muted)}.location{display:flex;align-items:center;gap:9px;font-size:12px;margin-bottom:17px}.location .od-icon{color:var(--purple);--od-icon-size:17px}.location small{display:block;color:var(--muted);font-size:12px}.primary,.secondary,.text-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:30px;min-height:44px;padding:10px 18px;font-size:12px;font-weight:500}.primary{background:var(--purple);border:1px solid var(--purple);color:white}.secondary{background:white;border:1px solid var(--line);color:var(--dark)}.text-button{background:none;border:0;color:var(--purple);padding:8px}.primary .od-icon,.secondary .od-icon{--od-icon-size:16px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .primary{flex:1}.additional{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}.additional summary{font-size:12px;cursor:pointer;min-height:30px;color:var(--muted)}.additional p{font-size:12px;color:var(--muted);padding:8px 0}.additional .mono{font-size:12px}.help-note{margin-top:23px;display:flex;gap:8px;color:var(--muted);font-size:12px;align-items:flex-start}.help-note .od-icon{--od-icon-size:17px}.end-mark{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--muted);margin:27px 0 0;font-size:12px}.end-mark:before,.end-mark:after{content:'';width:32px;height:1px;background:var(--line)}.right{padding-top:12px}.day-mark{color:var(--muted);font-size:11px;white-space:nowrap;text-align:right}.feedback{background:#faf7fe;border-radius:13px;padding:16px;margin-top:15px}.feedback h3{font-size:17px}.feedback>p{font-size:12px;color:var(--muted);margin:5px 0 10px}.stars{display:flex;gap:6px;margin:8px 0}.stars button{font-size:29px;line-height:1;border:0;background:none;color:#c6b5d8;min-width:38px;min-height:44px;padding:2px}.stars button.on{color:var(--purple)}textarea{width:100%;border:1px solid #ded2e8;border-radius:10px;padding:10px;background:white;min-height:75px;resize:vertical;font-size:12px;margin:5px 0 10px}.feedback-success{color:var(--green);background:var(--success-bg);padding:12px 14px;border-radius:12px;margin-top:12px;font-size:12px}.prototype-toolbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:7px;padding:7px 9px 7px 16px;background:#fff;border:1px solid var(--line);border-radius:40px;box-shadow:0 8px 28px #32006b12;max-width:calc(100% - 24px)}.prototype-toolbar>span{font-size:11px;letter-spacing:.08em;color:var(--muted);margin-right:5px;white-space:nowrap}.prototype-toolbar button{border:0;background:var(--pale);color:var(--dark);min-height:44px;white-space:nowrap;border-radius:25px;padding:8px 14px;font-size:11px;display:flex;align-items:center;gap:6px}.prototype-toolbar .od-icon{--od-icon-size:14px}.prototype-toolbar .reset{background:transparent;padding:5px 7px}.toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);border-radius:12px;background:var(--dark);color:white;padding:12px 20px;z-index:40;box-shadow:0 8px 30px #32006b22;font-size:12px;width:max-content;max-width:90%;text-align:center}dialog{border:0;border-radius:24px;padding:28px;width:420px;max-width:calc(100% - 32px);box-shadow:0 20px 80px #32006b30;color:var(--ink)}dialog::backdrop{background:#210c3f66;backdrop-filter:blur(4px)}dialog h2{font-size:25px;margin:5px 0 10px}dialog p{font-size:13px;color:var(--muted);margin-bottom:22px}dialog .close{float:right;background:none;border:0;width:32px;height:32px;font-size:23px}.qr-illustration{margin:10px auto 18px;width:104px;height:104px;display:grid;place-items:center;background:var(--pale);border-radius:22px;color:var(--purple)}.qr-illustration .od-icon{--od-icon-size:58px}dialog .qr-option{width:100%;text-align:left;justify-content:space-between;margin-top:9px;border-radius:12px}.empty-detail{background:#faf7fe;padding:16px;border-radius:12px;color:var(--muted);font-size:12px}.cancel-link{color:#8a5a6c;font-size:12px;background:none;border:0;padding:8px 0;min-height:36px}.finished-banner{background:var(--success-bg);color:var(--green);border-radius:12px;padding:14px;margin-bottom:18px;font-size:12px}.card-header-note{font-size:12px;color:var(--muted);margin:0 0 18px}.icon-button{min-width:44px;width:44px;height:44px}.tab .step-number .od-icon{--od-icon-size:15px}.skip{position:fixed;left:12px;top:-60px;background:white;z-index:50;padding:10px}.skip:focus{top:12px}#wallet{scroll-margin-top:calc(var(--top-h) + 8px)}
+@media(min-width:1500px){.layout{padding-top:52px}}
+@media(max-width:1100px){:root{--top-h:81px}.layout{grid-template-columns:205px minmax(0,650px);gap:30px}.right{display:none}.top-inner{height:80px}}
+@media(max-width:760px){:root{--top-h:73px}.top-inner{height:72px;padding:0 22px}.brand-area>span,.person .name{display:none}.logo{height:28px}.avatar{width:32px;height:32px;font-size:12px}.layout{display:block;padding:25px 18px 110px;max-width:590px}.aside,.right{display:none}h1{font-size:32px}.intro{margin-bottom:21px}.intro p{font-size:12px}.journey-code{font-size:11px;padding:6px 10px}.progress{margin-bottom:19px}.tab{padding:8px;gap:7px;min-height:60px}.tab .step-number{width:23px;height:23px;font-size:10px}.tab .tab-text{font-size:11px}.tab small{font-size:9px}.tabs{border-radius:15px;padding:4px;gap:3px}.notice{padding:13px 12px;gap:9px;border-radius:14px}.notice-icon{width:32px;height:32px}.notice p{font-size:12px}.notice strong{font-size:12px}.notice button{padding:6px 10px;font-size:11px}.ticket-top{padding:17px 16px;gap:10px}.ticket-info h3{font-size:16px}.ticket-info .eyebrow{font-size:11px}.status{font-size:11px}.card-summary{padding:0 16px 15px;font-size:12px}.ticket-detail{padding:19px 16px}.section-title h2{font-size:20px}.section-title p{font-size:11px}.chevron{width:12px}.queue-status h3{font-size:22px}.number{padding:14px}.number-value{font-size:28px}.prototype-toolbar{bottom:10px;padding:6px 7px;gap:4px}.prototype-toolbar>span{display:none}.prototype-toolbar button{padding:8px 10px;min-height:44px;font-size:11px}.live{font-size:11px}.intro .eyebrow{font-size:11px}.stage-navigation{padding-top:7px}.icon-button{height:36px;width:36px}.end-mark{margin-bottom:10px}}
+@media(max-width:370px){.tab .step-number{display:none}.tab{min-width:0;padding:8px 9px}.tab small{font-size:8px}.prototype-toolbar button{padding:6px 8px;font-size:11px}.prototype-toolbar button:not(.reset) .od-icon{display:none}.queue-status{gap:8px}.queue-status h3{font-size:20px}.live{white-space:normal}.intro{gap:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* —— Réplica: foco, contraste e áreas de toque —— */
+button, a, input, textarea, select { outline-offset: 4px; }
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible { outline: 3px solid var(--purple); outline-offset: 4px; }
+
+.primary, .secondary { min-height: 44px; }
+.icon-button { min-width: 44px; min-height: 44px; }
+
+.text-button { position: relative; }
+.text-button::after { content: ""; position: absolute; inset: -9px 0; border-radius: 12px; }
+
+.stars button { position: relative; min-width: 44px; }
+.stars button::after { content: ""; position: absolute; inset: -3px; }
+
+dialog .close { position: relative; }
+dialog .close::after { content: ""; position: absolute; inset: -6px; }
+
+.notice button { position: relative; }
+.notice button::after { content: ""; position: absolute; inset: -4px -3px; }
+
+.prototype-toolbar button { position: relative; }
+.prototype-toolbar .reset { min-width: 38px; }
+.prototype-toolbar button::after { content: ""; position: absolute; inset: -6px -3px; }
+
+.cancel-link { color: #8a5a6c; min-height: 44px; }
+.additional summary { min-height: 44px; }
+.end-mark { color: #786c83; }
+
+.number-value small.ordinal { vertical-align: super; font-size: 13px; line-height: 0; }
+
+/* O bilhete não tem numeração: o bloco de números do atendimento em curso
+   tem uma coluna só (Destino), sem célula vazia à esquerda. */
+.numbers.single { grid-template-columns: minmax(0, 1fr); }
+
+/* Mais etapas: trilho horizontal com abas de largura confortável e aba ativa sempre visível. */
+.tabs.many { overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; scroll-snap-type: x proximity; }
+.tabs.many::-webkit-scrollbar { display: none; }
+/* Trilho arrastável: o snap é suspenso durante o gesto para não puxar de
+   volta a cada quadro; volta ao soltar, quando o settle escolhe a etapa. */
+html.rail-dragging .tabs.many { scroll-snap-type: none; }
+@media (hover: hover) {
+  .tabs.many { cursor: grab; }
+  html.rail-dragging .tabs.many { cursor: grabbing; }
+}
+.tabs.many .tab { flex: 1 1 0; min-width: 0; padding: 9px 8px; gap: 8px; scroll-snap-align: center; }
+@media (max-width: 960px) { .tabs.many .tab { flex: 1 0 124px; padding: 8px 10px; gap: 7px; } }
+@media (max-width: 370px) { .tabs.many .tab { flex-basis: 104px; padding: 8px 9px; } }
+
+/* O modal de QR agora lista mais bilhetes; garante rolagem em telas baixas. */
+dialog { max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+
+/* Etapa concluída: card de sucesso com próximo passo.
+   As cores vêm de tokens --fc-* definidos em [data-stage-card]; sem o atributo,
+   o card usa o tratamento A (atual). Trocar a variante é trocar o atributo. */
+.finished-banner { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 18px 20px; border: 1px solid var(--fc-line, var(--success-border)); border-radius: 16px; background: var(--fc-bg, var(--success-bg)); color: var(--fc-title, var(--ink)); font-size: 12px; }
+.finished-icon { display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 13px; background: var(--fc-icon-bg, var(--green)); color: var(--fc-icon-ink, #fff); }
+.finished-copy { flex: 1 1 220px; min-width: 0; display: grid; gap: 4px; }
+.finished-copy .eyebrow { color: var(--fc-eyebrow, var(--green)); font-size: 11px; }
+.finished-copy h3 { font-size: 18px; line-height: 1.2; letter-spacing: -.02em; color: var(--fc-title, var(--ink)); }
+.finished-copy p { font-size: 12px; line-height: 1.5; color: var(--fc-body, var(--success-ink)); }
+.finished-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: none; min-height: 44px; padding: 8px 14px; border: 1px solid var(--fc-cta-line, var(--success-border)); border-radius: 30px; background: var(--fc-cta-bg, #fff); color: var(--fc-cta-ink, var(--green)); font-size: 11px; font-weight: 600; text-decoration: none; }
+.finished-action:hover { background: var(--fc-cta-hover, var(--fc-bg, var(--success-bg))); }
+.finished-action:focus-visible { outline-color: var(--fc-focus, var(--purple)); }
+.finished-action .od-icon { width: 14px; height: 14px; }
+@media (max-width: 760px) {
+  .finished-banner { align-items: flex-start; gap: 12px; padding: 16px; }
+  .finished-icon { width: 38px; height: 38px; border-radius: 12px; }
+  .finished-copy { flex: 1 1 200px; }
+  .finished-action { width: 100%; margin-top: 2px; }
+}
+
+/* —— Tratamentos de cor do card de etapa (teste A–F) ——
+   Cada bloco define apenas tokens; nenhum seletor de componente é duplicado.
+   Aplique no protótipo com <html data-stage-card="b">. */
+[data-stage-card="a"] { --fc-bg: #edf6f2; --fc-line: #cfe9df; --fc-icon-bg: #007d5c; --fc-icon-ink: #fff; --fc-eyebrow: #007d5c; --fc-title: #291d38; --fc-body: #3f5f52; --fc-cta-bg: #fff; --fc-cta-line: #cfe9df; --fc-cta-ink: #007d5c; --fc-cta-hover: #e3f1ea; --fc-focus: #007d5c; }
+[data-stage-card="b"] { --fc-bg: #32006b; --fc-line: #32006b; --fc-icon-bg: var(--lilac); --fc-icon-ink: #32006b; --fc-eyebrow: var(--lilac); --fc-title: #fff; --fc-body: #dcd2ea; --fc-cta-bg: #fff; --fc-cta-line: #fff; --fc-cta-ink: #32006b; --fc-cta-hover: #efe3ff; --fc-focus: var(--lilac); }
+[data-stage-card="c"] { --fc-bg: #f3e9ff; --fc-line: #ddc9fb; --fc-icon-bg: #8c27ff; --fc-icon-ink: #fff; --fc-eyebrow: #6b1fd0; --fc-title: #291d38; --fc-body: #5a4a6b; --fc-cta-bg: #fff; --fc-cta-line: #ddc9fb; --fc-cta-ink: #6b1fd0; --fc-cta-hover: #ede0ff; --fc-focus: #32006b; }
+[data-stage-card="d"] { --fc-bg: #fff; --fc-line: #e7e1ed; --fc-icon-bg: #f3e9ff; --fc-icon-ink: #32006b; --fc-eyebrow: #6b1fd0; --fc-title: #291d38; --fc-body: #746779; --fc-cta-bg: #32006b; --fc-cta-line: #32006b; --fc-cta-ink: #fff; --fc-cta-hover: #4a1a8f; --fc-focus: #8c27ff; }
+[data-stage-card="e"] { --fc-bg: #d8c2f5; --fc-line: #cbb5e6; --fc-icon-bg: #32006b; --fc-icon-ink: #d8c2f5; --fc-eyebrow: #4a1a8f; --fc-title: #32006b; --fc-body: #4a2d6b; --fc-cta-bg: #32006b; --fc-cta-line: #32006b; --fc-cta-ink: #fff; --fc-cta-hover: #4a1a8f; --fc-focus: #32006b; }
+[data-stage-card="f"] { --fc-bg: #fff; --fc-line: #d9ece4; --fc-icon-bg: #007d5c; --fc-icon-ink: #fff; --fc-eyebrow: #007d5c; --fc-title: #291d38; --fc-body: #746779; --fc-cta-bg: #fff; --fc-cta-line: #bcded1; --fc-cta-ink: #007d5c; --fc-cta-hover: #edf6f2; --fc-focus: #007d5c; }
+
+/* —— Card de etapa (abas): tokens --sc-* ——
+   Sem data-stage-tab no <html>, o componente mantém o tratamento atual (A).
+   As regras trocam apenas cor, realce e peso; estrutura, foco e teclado seguem iguais. */
+.tabs { background: var(--sc-rail-bg, #fff); border-color: var(--sc-rail-line, var(--line)); }
+.tab { position: relative; background: var(--sc-tab-bg, transparent); border: 1px solid var(--sc-tab-line, transparent); color: var(--sc-tab-ink, var(--ink)); box-shadow: var(--sc-tab-shadow, none); }
+.tab .step-number { background: var(--sc-num-bg, transparent); border-color: var(--sc-num-line, #dcd0e8); color: var(--sc-num-ink, var(--ink)); }
+.tab .tab-text { font-weight: var(--sc-tab-weight, 500); }
+.tab .tab-text small { color: var(--sc-tab-small, var(--muted)); }
+.tab:not([aria-selected="true"]):hover { background: var(--sc-tab-hover, transparent); }
+.tab[aria-selected="true"] { background: var(--sc-sel-bg, var(--dark)); border-color: var(--sc-sel-line, var(--sc-sel-bg, var(--dark))); color: var(--sc-sel-ink, #fff); box-shadow: var(--sc-sel-shadow, var(--sc-tab-shadow, none)); }
+.tab[aria-selected="true"] .tab-text { font-weight: var(--sc-sel-weight, var(--sc-tab-weight, 500)); }
+.tab[aria-selected="true"] small { color: var(--sc-sel-small, #d8c2f5); }
+.tab[aria-selected="true"] .step-number { background: var(--sc-sel-num-bg, var(--purple)); border-color: var(--sc-sel-num-line, var(--sc-sel-num-bg, var(--purple))); color: var(--sc-sel-num-ink, #fff); }
+.tab.finished .step-number { background: var(--sc-done-num-bg, transparent); border-color: var(--sc-done-num-line, #bee0d3); color: var(--sc-done-num-ink, var(--green)); }
+.tab.finished[aria-selected="true"] .step-number { background: var(--sc-done-sel-num-bg, var(--sc-sel-num-bg, var(--purple))); border-color: var(--sc-done-sel-num-line, var(--sc-done-sel-num-bg, var(--sc-sel-num-bg, var(--purple)))); color: var(--sc-done-sel-num-ink, #fff); }
+
+/* F: barra de progresso na base do card — invisível nas demais variantes. */
+.tab::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 0; height: 2px; border-radius: 2px; background: var(--sc-bar, transparent); pointer-events: none; }
+.tab[aria-selected="true"]::after { background: var(--sc-sel-bar, var(--sc-bar, transparent)); }
+.tab.finished::after { background: var(--sc-done-bar, var(--sc-bar, transparent)); }
+.tab.finished[aria-selected="true"]::after { background: var(--sc-done-sel-bar, var(--sc-sel-bar, var(--sc-bar, transparent))); }
+
+/* Padrão aprovado: C · Lilás preenchido.
+   Os tokens no :root valem para toda a aplicação; os blocos [data-stage-tab]
+   abaixo só entram em cena quando a URL pede uma variante (?etapa=a–f). */
+:root { --sc-rail-bg: #f3e9ff; --sc-rail-line: #e3d3fa; --sc-tab-bg: #fff; --sc-tab-line: #f0e4ff; --sc-tab-ink: var(--ink); --sc-tab-small: #6b5b7a; --sc-tab-hover: #fdfaff; --sc-num-bg: #f7efff; --sc-num-line: #e6d6fa; --sc-num-ink: var(--dark); --sc-sel-bg: var(--dark); --sc-sel-line: var(--dark); --sc-sel-ink: #fff; --sc-sel-small: #d8c2f5; --sc-sel-num-bg: var(--purple); --sc-sel-num-line: var(--purple); --sc-sel-num-ink: #fff; --sc-done-num-bg: #edf6f2; --sc-done-num-line: #d7ece3; --sc-done-num-ink: var(--green); --sc-done-sel-num-bg: var(--lilac); --sc-done-sel-num-line: var(--lilac); --sc-done-sel-num-ink: var(--dark); }
+
+/* A · atual (referência, sem hover) */
+[data-stage-tab="a"] { --sc-rail-bg: #fff; --sc-rail-line: var(--line); --sc-tab-bg: transparent; --sc-tab-line: transparent; --sc-tab-ink: var(--ink); --sc-tab-small: var(--muted); --sc-tab-hover: transparent; --sc-num-bg: transparent; --sc-num-line: #dcd0e8; --sc-num-ink: var(--ink); --sc-sel-bg: var(--dark); --sc-sel-line: var(--dark); --sc-sel-ink: #fff; --sc-sel-small: #d8c2f5; --sc-sel-num-bg: var(--purple); --sc-sel-num-line: var(--purple); --sc-sel-num-ink: #fff; --sc-done-num-bg: transparent; --sc-done-num-line: #bee0d3; --sc-done-num-ink: var(--green); --sc-done-sel-num-bg: var(--purple); --sc-done-sel-num-line: var(--purple); --sc-done-sel-num-ink: #fff; }
+
+/* B · papel com contorno: o atual vira contorno roxo, sem bloco escuro */
+[data-stage-tab="b"] { --sc-rail-bg: #fff; --sc-rail-line: var(--line); --sc-tab-bg: #fff; --sc-tab-line: transparent; --sc-tab-ink: var(--ink); --sc-tab-small: var(--muted); --sc-tab-hover: #faf6ff; --sc-num-bg: #f6efff; --sc-num-line: #f6efff; --sc-num-ink: var(--dark); --sc-sel-bg: #fff; --sc-sel-line: var(--purple); --sc-sel-ink: var(--dark); --sc-sel-small: #5f4f6f; --sc-sel-num-bg: var(--dark); --sc-sel-num-line: var(--dark); --sc-sel-num-ink: #fff; --sc-done-num-bg: #edf6f2; --sc-done-num-line: #edf6f2; --sc-done-num-ink: var(--green); --sc-done-sel-num-bg: var(--dark); --sc-done-sel-num-line: var(--dark); --sc-done-sel-num-ink: #fff; --sc-sel-shadow: 0 0 0 1px var(--purple), 0 6px 16px #32006b14; }
+
+/* C · lilás preenchido: trilho lilás, cards brancos, atual roxo profundo */
+[data-stage-tab="c"] { --sc-rail-bg: #f3e9ff; --sc-rail-line: #e3d3fa; --sc-tab-bg: #fff; --sc-tab-line: #f0e4ff; --sc-tab-ink: var(--ink); --sc-tab-small: #6b5b7a; --sc-tab-hover: #fdfaff; --sc-num-bg: #f7efff; --sc-num-line: #e6d6fa; --sc-num-ink: var(--dark); --sc-sel-bg: var(--dark); --sc-sel-line: var(--dark); --sc-sel-ink: #fff; --sc-sel-small: #d8c2f5; --sc-sel-num-bg: var(--purple); --sc-sel-num-line: var(--purple); --sc-sel-num-ink: #fff; --sc-done-num-bg: #edf6f2; --sc-done-num-line: #d7ece3; --sc-done-num-ink: var(--green); --sc-done-sel-num-bg: var(--lilac); --sc-done-sel-num-line: var(--lilac); --sc-done-sel-num-ink: var(--dark); }
+
+/* D · número sólido: marcador sempre preenchido, atual escuro */
+[data-stage-tab="d"] { --sc-rail-bg: #fff; --sc-rail-line: var(--line); --sc-tab-bg: transparent; --sc-tab-line: transparent; --sc-tab-ink: var(--ink); --sc-tab-small: var(--muted); --sc-tab-hover: #f7f1fd; --sc-num-bg: #f3e9ff; --sc-num-line: #f3e9ff; --sc-num-ink: #6b1fd0; --sc-sel-bg: var(--dark); --sc-sel-line: var(--dark); --sc-sel-ink: #fff; --sc-sel-small: #d8c2f5; --sc-sel-num-bg: var(--lilac); --sc-sel-num-line: var(--lilac); --sc-sel-num-ink: var(--dark); --sc-done-num-bg: #e3f2ea; --sc-done-num-line: #e3f2ea; --sc-done-num-ink: var(--green); --sc-done-sel-num-bg: var(--lilac); --sc-done-sel-num-line: var(--lilac); --sc-done-sel-num-ink: var(--dark); }
+
+/* E · segmentado: trilho lilás contínuo, atual branco e elevado */
+[data-stage-tab="e"] { --sc-rail-bg: #efe3ff; --sc-rail-line: #efe3ff; --sc-tab-bg: transparent; --sc-tab-line: transparent; --sc-tab-ink: var(--ink); --sc-tab-small: #5f4f6f; --sc-tab-hover: #e7d8fa; --sc-num-bg: transparent; --sc-num-line: #d9c6f2; --sc-num-ink: var(--dark); --sc-sel-bg: #fff; --sc-sel-line: #fff; --sc-sel-ink: var(--dark); --sc-sel-small: #5f4f6f; --sc-sel-num-bg: #f3e9ff; --sc-sel-num-line: #f3e9ff; --sc-sel-num-ink: var(--dark); --sc-done-num-bg: var(--dark); --sc-done-num-line: var(--dark); --sc-done-num-ink: var(--lilac); --sc-done-sel-num-bg: #f3e9ff; --sc-done-sel-num-line: #f3e9ff; --sc-done-sel-num-ink: var(--green); --sc-sel-shadow: 0 2px 8px #32006b1f; }
+
+/* F · minimal com progresso: sem preenchimento, barra de 2px na base */
+[data-stage-tab="f"] { --sc-rail-bg: #fff; --sc-rail-line: var(--line); --sc-tab-bg: transparent; --sc-tab-line: transparent; --sc-tab-ink: var(--ink); --sc-tab-small: var(--muted); --sc-tab-hover: #f7f2fa; --sc-num-bg: transparent; --sc-num-line: transparent; --sc-num-ink: var(--muted); --sc-sel-bg: transparent; --sc-sel-line: transparent; --sc-sel-ink: var(--dark); --sc-sel-small: #5f4f6f; --sc-sel-weight: 600; --sc-sel-num-bg: transparent; --sc-sel-num-line: transparent; --sc-sel-num-ink: #6b1fd0; --sc-done-num-bg: transparent; --sc-done-num-line: transparent; --sc-done-num-ink: var(--green); --sc-done-sel-num-bg: transparent; --sc-done-sel-num-line: transparent; --sc-done-sel-num-ink: var(--green); --sc-bar: #ded4e8; --sc-sel-bar: var(--purple); --sc-done-bar: var(--green); --sc-done-sel-bar: var(--green); }
+
+/* Atalho de descoberta da prancha de teste na barra do protótipo. */
+.prototype-toolbar .toolbar-link { display: flex; align-items: center; gap: 6px; min-height: 33px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 25px; background: #fff; color: var(--dark); font-size: 10px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.prototype-toolbar .toolbar-link:hover { background: var(--pale); border-color: #e0cdf8; }
+@media (max-width: 760px) { .prototype-toolbar .toolbar-link { display: none; } }
+
+/* —— Navegação horizontal: estruturas B–F (?nav=a–f) ——
+   Sem [data-stage-nav] no <html>, a faixa continua em A · trilho de cards.
+   Estes blocos mudam estrutura, densidade e leitura de estado; a cor
+   aprovada (C · lilás preenchido) continua vindo dos tokens --sc-*.
+   Nada aqui altera a liberação em cadeia, o teclado ou os alvos de 44px. */
+
+/* Linha de apoio: dica de gesto + contador de etapa (E e F). */
+.stage-meta { gap: 12px; }
+.nav-counter { display: none; font-size: 11px; font-weight: 600; color: var(--muted); }
+[data-stage-nav="e"] .nav-hint,
+[data-stage-nav="f"] .nav-hint { display: none; }
+[data-stage-nav="e"] .nav-counter,
+[data-stage-nav="f"] .nav-counter { display: block; }
+[data-stage-nav="f"] .nav-counter { font-size: 12px; color: var(--ink); }
+
+/* B · Linha do tempo — números sobre uma linha contínua, nome embaixo. */
+[data-stage-nav="b"] .tabs { background: transparent; border: 0; border-radius: 0; padding: 0; gap: 8px; }
+[data-stage-nav="b"] .tabs .tab { flex: 1 1 0; min-width: 0; min-height: 64px; padding: 0; gap: 8px; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; border: 0; border-radius: 10px; background: transparent; box-shadow: none; }
+[data-stage-nav="b"] .tabs .tab::before { content: ""; position: absolute; top: 13px; left: calc(50% + 16px); width: calc(100% - 22px); height: 2px; border-radius: 2px; background: #dccdf0; }
+[data-stage-nav="b"] .tabs .tab:last-child::before { display: none; }
+[data-stage-nav="b"] .tabs .tab.finished::before { background: var(--purple); }
+[data-stage-nav="b"] .tabs .tab[aria-selected="true"]::before { background: #dccdf0; }
+[data-stage-nav="b"] .tabs .tab .step-number { display: grid; position: relative; z-index: 1; width: 28px; height: 28px; background: var(--paper); border: 1.5px solid #cbb5e6; color: var(--dark); font-size: 11px; }
+[data-stage-nav="b"] .tabs .tab .tab-text { font-size: 0; }
+[data-stage-nav="b"] .tabs .tab .tab-text small { margin-top: 0; font-size: 11.5px; line-height: 1.35; color: #5f4f6f; }
+[data-stage-nav="b"] .tabs .tab:not([aria-selected="true"]):hover { background: #f3e9ff; }
+[data-stage-nav="b"] .tabs .tab[aria-selected="true"] { background: transparent; border-color: transparent; color: var(--dark); box-shadow: none; }
+[data-stage-nav="b"] .tabs .tab[aria-selected="true"] .step-number { background: var(--dark); border-color: var(--dark); color: #fff; }
+[data-stage-nav="b"] .tabs .tab[aria-selected="true"] small { color: var(--dark); font-weight: 600; }
+[data-stage-nav="b"] .tabs .tab.finished .step-number { background: var(--success-bg); border-color: #cfe9df; }
+[data-stage-nav="b"] .tabs .tab.finished[aria-selected="true"] .step-number { background: var(--lilac); border-color: var(--lilac); color: var(--dark); }
+
+/* C · Chips compactos — uma linha, 44px, nome visível e número em pastilha. */
+[data-stage-nav="c"] .tabs { background: transparent; border: 0; border-radius: 0; padding: 0; gap: 6px; }
+[data-stage-nav="c"] .tabs .tab { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 10px; gap: 7px; justify-content: center; align-items: center; border: 1px solid #e9def5; border-radius: 22px; background: #fff; box-shadow: none; }
+[data-stage-nav="c"] .tabs .tab .step-number { display: grid; width: 20px; height: 20px; border: 0; background: #f7efff; color: var(--dark); font-size: 10px; }
+[data-stage-nav="c"] .tabs .tab .tab-text { font-size: 0; }
+[data-stage-nav="c"] .tabs .tab .tab-text small { margin-top: 0; font-size: 11px; color: #6b5b7a; white-space: nowrap; }
+[data-stage-nav="c"] .tabs .tab:not([aria-selected="true"]):hover { background: #fdfaff; border-color: #d9c6f2; }
+[data-stage-nav="c"] .tabs .tab[aria-selected="true"] { background: var(--dark); border-color: var(--dark); color: #fff; }
+[data-stage-nav="c"] .tabs .tab[aria-selected="true"] .step-number { background: var(--purple); color: #fff; }
+[data-stage-nav="c"] .tabs .tab[aria-selected="true"] small { color: #fff; }
+[data-stage-nav="c"] .tabs .tab.finished .step-number { background: var(--success-bg); color: var(--green); }
+[data-stage-nav="c"] .tabs .tab.finished[aria-selected="true"] .step-number { background: var(--lilac); color: var(--dark); }
+
+/* D · Atual em destaque — só a etapa atual mostra o rótulo inteiro. */
+[data-stage-nav="d"] .tabs { background: transparent; border: 0; border-radius: 0; padding: 0; gap: 8px; align-items: center; }
+[data-stage-nav="d"] .tabs .tab { flex: 0 0 auto; width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 0; gap: 0; justify-content: center; border: 0; border-radius: 50%; background: #f3e9ff; box-shadow: none; }
+[data-stage-nav="d"] .tabs .tab .step-number { display: grid; width: auto; height: auto; border: 0; background: transparent; color: var(--dark); font-size: 12px; }
+[data-stage-nav="d"] .tabs .tab .tab-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+[data-stage-nav="d"] .tabs .tab:not([aria-selected="true"]):hover { background: #e9d9ff; }
+[data-stage-nav="d"] .tabs .tab.finished { background: #e3f2ea; }
+[data-stage-nav="d"] .tabs .tab.finished .step-number { color: var(--green); }
+[data-stage-nav="d"] .tabs .tab[aria-selected="true"] { flex: 1 1 auto; width: auto; min-width: 0; height: 68px; padding: 0 16px; gap: 12px; justify-content: flex-start; border-radius: 18px; background: var(--dark); color: #fff; }
+[data-stage-nav="d"] .tabs .tab[aria-selected="true"] .tab-text { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; white-space: normal; font-size: 12px; }
+[data-stage-nav="d"] .tabs .tab[aria-selected="true"] .step-number { width: 30px; height: 30px; border-radius: 50%; background: var(--purple); color: #fff; font-size: 12px; }
+[data-stage-nav="d"] .tabs .tab.finished[aria-selected="true"] .step-number { background: var(--lilac); color: var(--dark); }
+
+/* E · Paginada — só a etapa atual, grande, com contador e setas na linha de apoio. */
+[data-stage-nav="e"] .tabs { background: transparent; border: 0; border-radius: 0; padding: 0; gap: 0; }
+[data-stage-nav="e"] .tabs .tab { display: none; }
+[data-stage-nav="e"] .tabs .tab[aria-selected="true"] { display: flex; flex: 1 1 100%; width: 100%; min-width: 0; min-height: 74px; padding: 12px 16px; gap: 14px; border: 0; border-radius: 18px; background: var(--dark); color: #fff; box-shadow: none; }
+[data-stage-nav="e"] .tabs .tab[aria-selected="true"] .step-number { display: grid; width: 34px; height: 34px; border: 0; background: var(--purple); color: #fff; font-size: 12px; }
+[data-stage-nav="e"] .tabs .tab[aria-selected="true"] .tab-text { font-size: 13px; }
+[data-stage-nav="e"] .tabs .tab[aria-selected="true"] small { font-size: 11px; color: #d8c2f5; }
+
+/* F · Barra navegável — cinco segmentos de 8px com área de toque de 44px. */
+[data-stage-nav="f"] .tabs { background: transparent; border: 0; border-radius: 0; padding: 0; gap: 6px; }
+[data-stage-nav="f"] .tabs .tab { flex: 1 1 0; min-width: 0; height: 44px; min-height: 44px; padding: 18px 2px; gap: 0; justify-content: center; border: 0; border-radius: 8px; background: transparent; box-shadow: none; }
+[data-stage-nav="f"] .tabs .tab .step-number { display: grid; width: 100%; height: 8px; border: 0; border-radius: 4px; background: #9d84bf; font-size: 0; color: transparent; }
+[data-stage-nav="f"] .tabs .tab .step-number .od-icon { display: none; }
+[data-stage-nav="f"] .tabs .tab .tab-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+[data-stage-nav="f"] .tabs .tab:not([aria-selected="true"]):hover { background: #f3e9ff; }
+[data-stage-nav="f"] .tabs .tab.finished .step-number { background: var(--purple); }
+[data-stage-nav="f"] .tabs .tab[aria-selected="true"] { background: transparent; color: var(--ink); box-shadow: none; }
+[data-stage-nav="f"] .tabs .tab[aria-selected="true"] .step-number { background: var(--dark); }
+
+/* G–I · o recorte do card seguinte dentro do trilho A.
+   A estrutura não muda: muda como a borda direita trata o próximo card.
+   G mantém o peek, mas só até o fim do nome; H troca o recorte por um
+   indicador de progresso; I abre mão do peek para caber três cards.
+   H · Snap + indicador é o padrão aprovado — index.html traz
+   data-stage-nav="h" no <html>; G e I ficam como alternativas via ?nav. */
+[data-stage-nav="g"] .nav-hint,
+[data-stage-nav="h"] .nav-hint,
+[data-stage-nav="i"] .nav-hint { display: none; }
+[data-stage-nav="g"] .nav-counter,
+[data-stage-nav="h"] .nav-counter,
+[data-stage-nav="i"] .nav-counter { display: block; }
+
+/* Indicador de cinco segmentos — só em H. */
+.nav-progress { display: none; flex: none; width: 88px; align-items: center; gap: 4px; }
+.nav-progress i { flex: 1; height: 4px; border-radius: 8px; background: #e5dceb; }
+.nav-progress i.done { background: var(--purple); }
+[data-stage-nav="h"] .nav-progress { display: flex; }
+[data-stage-nav="h"] .stage-meta { justify-content: flex-start; }
+[data-stage-nav="h"] .step-controls { margin-left: auto; }
+
+/* Abaixo de 960px o trilho rola; é onde o recorte aparece. */
+@media (max-width: 960px) {
+  [data-stage-nav="g"] .tabs.many,
+  [data-stage-nav="h"] .tabs.many,
+  [data-stage-nav="i"] .tabs.many { gap: 3px; scroll-snap-type: x mandatory; scroll-padding-inline: 4px; }
+  [data-stage-nav="g"] .tabs.many .tab,
+  [data-stage-nav="i"] .tabs.many .tab { padding-inline: 7px; scroll-snap-align: start; }
+  [data-stage-nav="h"] .tabs.many .tab { scroll-snap-align: start; }
+  [data-stage-nav="g"] .tabs.many .tab .tab-text small,
+  [data-stage-nav="i"] .tabs.many .tab .tab-text small { overflow-wrap: anywhere; }
+
+  /* G · dois cards inteiros + a próxima etapa com número e nome completos.
+     Os 105px cobrem padding (7) + número (23) + gap (7) + nome mais longo (64)
+     + respiro: o corte cai depois do nome, nunca dentro dele. */
+  [data-stage-nav="g"] .tabs.many .tab { flex: 0 0 calc((100% - 6px - 105px) / 2); }
+
+  /* H · dois cards inteiros, sem recorte nenhum. */
+  [data-stage-nav="h"] .tabs.many .tab { flex: 0 0 calc((100% - 3px) / 2); }
+
+  /* I · três cards inteiros, sem recorte; a janela fica no contador. */
+  [data-stage-nav="i"] .tabs.many .tab { flex: 0 0 calc((100% - 6px) / 3); }
+}
+
+/* Em telas muito estreitas o peek legível não cabe sem apertar o nome:
+   G volta a mostrar dois cards e só o padding do terceiro. Padding e gap
+   internos caem para 5px para o nome mais longo continuar em uma linha. */
+@media (max-width: 389px) {
+  [data-stage-nav="g"] .tabs.many .tab { flex-basis: calc((100% - 6px - 6px) / 2); }
+  [data-stage-nav="g"] .tabs.many .tab,
+  [data-stage-nav="i"] .tabs.many .tab { padding-inline: 5px; gap: 5px; }
+}
+
+/* A barra de 2px pertence à variante de cor F do card; nas estruturas B–I ela não entra. */
+[data-stage-nav="b"] .tabs .tab::after,
+[data-stage-nav="c"] .tabs .tab::after,
+[data-stage-nav="d"] .tabs .tab::after,
+[data-stage-nav="e"] .tabs .tab::after,
+[data-stage-nav="f"] .tabs .tab::after,
+[data-stage-nav="g"] .tabs .tab::after,
+[data-stage-nav="h"] .tabs .tab::after,
+[data-stage-nav="i"] .tabs .tab::after { display: none; }
+
+/* Abaixo de 960px: B, D, E e F deixam de herdar a rolagem de 124px do trilho A. */
+@media (max-width: 960px) {
+  [data-stage-nav="b"] .tabs.many .tab { flex: 1 1 0; min-width: 0; padding: 0; }
+  [data-stage-nav="b"] .tabs.many .tab .tab-text small { font-size: 9.5px; letter-spacing: -.02em; }
+  [data-stage-nav="c"] .tabs.many .tab { flex: 0 0 112px; min-width: 112px; padding: 0 12px; }
+  [data-stage-nav="d"] .tabs.many .tab { flex: 0 0 auto; }
+  [data-stage-nav="d"] .tabs.many .tab[aria-selected="true"] { flex: 1 1 auto; height: 64px; padding: 0 12px; gap: 10px; }
+  [data-stage-nav="d"] .tabs.many .tab[aria-selected="true"] .tab-text { font-size: 11px; }
+  [data-stage-nav="d"] .tabs.many .tab[aria-selected="true"] .step-number { width: 28px; height: 28px; }
+  [data-stage-nav="e"] .tabs.many .tab[aria-selected="true"] { flex: 1 1 100%; width: 100%; }
+  [data-stage-nav="f"] .tabs.many .tab { flex: 1 1 0; min-width: 0; padding: 18px 2px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Motion — uma linguagem só: assentamento
+   ───────────────────────────────────────────────────────────────
+   Regras desta camada:
+   · anima apenas transform, opacity e cor — nunca width, height, top, left;
+   · nada em loop: atenção contínua compete com o conteúdo;
+   · a cor é estado (troca imediata), o movimento é a explicação.
+   A troca de etapa reescreve .tabs e #cards via innerHTML, então o estado
+   novo chega como @keyframes em nó recém-criado; só o que sobrevive entre
+   renders (indicador, barra fixa) usa transition.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --m-dur-instant: 110ms;  /* pressão do toque */
+  --m-dur-fast: 160ms;     /* cor, relevo */
+  --m-dur: 220ms;          /* entrada de conteúdo */
+  --m-dur-slow: 280ms;     /* trajetória do indicador */
+  --m-ease-out: cubic-bezier(.2, .8, .25, 1);
+  --m-ease-in: cubic-bezier(.4, 0, 1, 1);
+  --m-spring: cubic-bezier(.34, 1.4, .64, 1);
+  --m-stagger: 35ms;
+}
+
+@keyframes m-enter-right { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
+@keyframes m-enter-left  { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+@keyframes m-rise        { from { opacity: 0; transform: translateY(8px); }  to { opacity: 1; transform: none; } }
+@keyframes m-settle-pop  { from { transform: scale(.9); } 55% { transform: scale(1.06); } to { transform: none; } }
+@keyframes m-check-in    { from { transform: scale(.55); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes m-ring-out    { from { transform: scale(.8); opacity: .55; } to { transform: scale(1.55); opacity: 0; } }
+@keyframes m-slide-in    { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* —— 2 · Assentamento da aba ativa ——
+   A aba escurece na hora (cor = estado). O rótulo entra deslocado na direção
+   da navegação; o número dá um pop curto. */
+.tab.settling .step-number { animation: m-settle-pop 190ms var(--m-spring) both; }
+.tab.settling .tab-text { animation: m-enter-right 200ms var(--m-ease-out) both; }
+.tab.settling[data-dir="left"] .tab-text  { animation-name: m-enter-left; }
+.tab.settling[data-dir="right"] .tab-text { animation-name: m-enter-right; }
+
+/* —— 3 · Check que nasce ——
+   Só quando uma etapa conclui (o número vira check), não a cada render.
+   Vem depois do assentamento de propósito: se a etapa concluída for também
+   a que acabou de receber o foco, o check é o evento que deve ser lido.
+   O anel é um pseudo-elemento (transform + opacity), não box-shadow: nada
+   aqui anima propriedade que force repaint de layout. */
+.tab .step-number { position: relative; }
+.tab.just-done .step-number { animation: m-settle-pop 180ms var(--m-spring) both; }
+.tab.just-done .step-number .od-icon { animation: m-check-in 180ms var(--m-ease-out) both; }
+.tab.just-done .step-number::after {
+  content: ""; position: absolute; inset: -1px; border-radius: 50%;
+  border: 1.5px solid var(--lilac-strong); pointer-events: none;
+  animation: m-ring-out 520ms var(--m-ease-out) 60ms both;
+}
+
+/* —— 4 · Resposta do painel ——
+   Título, contador e cards chegam juntos, com a mesma direção da aba. */
+.stage-enter { animation-duration: var(--m-dur); animation-timing-function: var(--m-ease-out); animation-fill-mode: both; animation-delay: var(--enter-delay, 0ms); }
+.stage-enter[data-dir="right"] { animation-name: m-enter-right; }
+.stage-enter[data-dir="left"]  { animation-name: m-enter-left; }
+#cards.stage-enter { animation: none; } /* o container não entra; os cards entram */
+#cards.stage-enter > .ticket.stage-card { animation: m-rise var(--m-dur) var(--m-ease-out) both; animation-delay: calc(var(--enter-delay, 0ms) + var(--i, 0) * var(--m-stagger)); }
+#notice-container.panel-enter { animation: m-slide-in var(--m-dur-fast) var(--m-ease-out) both; }
+
+/* —— 5 · Pressão física ——
+   Alvos de 44px respondem ao dedo; o retorno é mais lento que a entrada. */
+.tab, .icon-button { transition: transform var(--m-dur-fast) var(--m-ease-out); }
+.tab:active, .icon-button:active { transform: scale(.95); transition-duration: var(--m-dur-instant); transition-timing-function: var(--m-ease-in); }
+
+/* —— 6 · Relevo ao fixar ——
+   Quando a faixa gruda no topo, o conteúdo passa por baixo: sombra + fio.
+   A sombra não ocupa espaço, então a altura da barra — e o top:139px do
+   aviso e o scroll-margin-top:145px dos cards — continua idêntica. */
+.stage-navigation.is-stuck { box-shadow: 0 6px 16px -12px #32006b4d; }
+/* Sentinel em fluxo, 1px, com margem negativa: fica exatamente na borda de
+   cima da faixa sem abrir espaço no layout. Quando ele sai da viewport, a
+   faixa está presa no topo. */
+.nav-sentinel { height: 1px; margin-bottom: -1px; pointer-events: none; }
+
+/* Transição de sombra mora no elemento, não no bloco de estado: assim ela
+   não reescreve o border-bottom que a folha base já define. */
+.stage-navigation { transition: box-shadow var(--m-dur-fast) var(--m-ease-out); }
+
+/* —— 1 · Indicador que viaja (H) ——
+   Cinco segmentos + um thumb. O thumb anda por transform e os segmentos
+   concluídos preenchem atrás dele; nada recriado entre renders.
+   --nav-i precisa ser registrada para animar: uma custom property sem
+   @property troca de valor em degraus e o thumb saltaria em vez de deslizar. */
+@property --nav-i { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+.nav-progress { position: relative; transition: --nav-i var(--m-dur-slow) var(--m-spring); }
+.nav-progress i { transition: background-color var(--m-dur-fast) var(--m-ease-out); }
+.nav-progress-thumb {
+  position: absolute; top: 0; left: 0; height: 4px; border-radius: 8px;
+  width: calc((100% - (var(--nav-count, 5) - 1) * 4px) / var(--nav-count, 5));
+  background: var(--dark);
+  transform: translateX(calc(var(--nav-i, 0) * (100% + 4px)));
+  pointer-events: none;
+}
+/* Primeira pintura: o thumb aparece no lugar, sem vir do zero. */
+.nav-progress[data-enter="init"] { transition: none; }
+
+/* —— Override de comparação: ?motion=off —— */
+[data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after {
+  animation: none !important; transition: none !important;
+}
+
+/* —— Acessibilidade: reduzir movimento desliga chegadas e trajetórias ——
+   O bloco anterior da folha cobre transition; este cobre animation, que
+   antes passaria por cima. Foco, cor e layout continuam intactos. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: .01ms !important;
+  }
+  .nav-progress-thumb { transition: none !important; }
+  .tab:active, .icon-button:active { transform: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Logo do header — montagem em 0,5×
+   ───────────────────────────────────────────────────────────────
+   O wordmark oficial (viewBox 0 0 465.4 99.2) fica solto sobre o roxo
+   #8c27ff, branco e sem bloco de fundo. As sete letras sobem da linha de
+   base e se encaixam na ordem de leitura — a construção “Montagem” do
+   laboratório, reproduzida aqui com --lm-sp: 2, ou seja, cada duração e
+   cada stagger valem o dobro: metade da velocidade.
+
+   Anima só transform e opacity. Nada de loop: a marca se monta uma vez,
+   ao carregar. A geometria é a do próprio SVG (transform-box: fill-box),
+   então o header não muda de altura e o wordmark escala com .logo.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --lm-sp: 2;  /* multiplicador de duração; 2 = metade da velocidade (0,5×) */
+}
+
+.header-logo {
+  overflow: visible;
+  aspect-ratio: 465.4 / 99.2;  /* a geometria do wordmark, explícita */
+}
+.header-logo .ltr {
+  transform-box: fill-box;
+  animation: fz-logo-rise calc(520ms * var(--lm-sp)) var(--m-spring) both;
+  animation-delay: calc(var(--i) * 55ms * var(--lm-sp));
+}
+.header-logo .ltr > * { fill: #fff; }
+
+@keyframes fz-logo-rise {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-logo .ltr { animation: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Correções FZ-4107 — estado, foco, alvos e tipografia
+   ───────────────────────────────────────────────────────────────
+   Correções cirúrgicas sobre o visual aprovado. Nenhuma composição
+   nova: 7 atendimentos / 5 etapas, mesmas cores de marca.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* —— P0-2 · foco visível e não cortado ——
+   .ticket tem overflow:hidden para segurar os cantos arredondados, então o
+   outline do .ticket-top era recortado em três lados. O anel passa para o
+   cartão inteiro, que não sofre recorte; o botão mantém o foco lógico. */
+.ticket-top:focus-visible { outline: none; }
+.ticket:has(.ticket-top:focus-visible) { outline: 3px solid var(--purple); outline-offset: 4px; }
+/* Fallback para navegadores sem :has(): o anel inset nunca é cortado. */
+@supports not selector(:has(*)) {
+  .ticket-top:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--purple); }
+}
+/* O trilho tem overflow-y:hidden (snap horizontal); o anel outline da aba
+   estourava em cima e embaixo. Anel duplo inset: branco separa do card roxo. */
+.tab:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 5px var(--purple);
+}
+/* FZ-4107 §3 — foco em superfície roxa/escura: anel duplo perceptível. */
+.primary:focus-visible,
+.notice button:focus-visible,
+.finished-action:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 5px var(--purple);
+}
+.notice button:focus-visible { box-shadow: 0 0 0 2px var(--dark), 0 0 0 5px var(--lilac); }
+
+/* —— P1-3 · contraste de gráficos essenciais —— */
+/* Trilho do progresso: #93809f = 3,41:1 sobre o papel (antes 1,26:1).
+   Os segmentos concluídos seguem roxos — o par de estados não muda. */
+.progress-track span { background: var(--track); }
+/* Estrelas não selecionadas: 3,6:1 sobre o cartão (antes 1,8:1). */
+.stars button { color: #8f7aa6; }
+/* Borda do marcador de etapa: era 1,48:1 sobre o branco. */
+/* 3,29:1 sobre o branco e 2,81:1 sobre o lilás — o marcador inativo é
+   reforçado pelo número em --dark, então a borda é reforço, não o único sinal. */
+.tab .step-number { border-color: var(--lilac-strong); }
+
+/* —— P0-3 · alturas reservadas pelo chrome fixo ——
+   --stage-nav-h é medido por ResizeObserver no app.js; --notice-h, pelo
+   renderNotice(). Os fallbacks mantêm o layout coerente sem JS. */
+.stage-navigation { box-shadow: none; }
+.anchor-offset { scroll-margin-top: calc(var(--top-h) + var(--stage-nav-h, 139px) + 8px); }
+
+/* —— P1-2 · estados de carregamento, erro e vazio —— */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.skeleton-stack { display: flex; flex-direction: column; gap: 13px; }
+.skeleton-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 21px;
+  padding: 19px 22px; display: flex; flex-direction: column; gap: 10px;
+}
+.sk { display: block; border-radius: 8px; background: linear-gradient(90deg, #efe9f4 0%, #f7f3fa 50%, #efe9f4 100%); background-size: 200% 100%; animation: sk-sweep 1.4s var(--m-ease-out, ease-out) infinite; }
+.sk-eyebrow { width: 34%; height: 10px; }
+.sk-title { width: 62%; height: 20px; }
+.sk-meta { width: 46%; height: 12px; }
+@keyframes sk-sweep { from { background-position: 140% 0; } to { background-position: -40% 0; } }
+@media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+
+.state-panel {
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  margin: 2px 0 22px;
+}
+.state-panel .state-icon {
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--pale); color: var(--dark); margin-bottom: 4px;
+}
+.state-panel h3 { font-size: 18px; line-height: 1.25; color: var(--ink); }
+.state-panel p { font-size: 13px; color: var(--muted); }
+.state-panel .primary { margin-top: 6px; }
+#notice-container .state-panel[role="alert"] { border-color: #e4d3f8; }
+
+/* —— P1-8 · estados Skipped e Confirmado (FZ-4107 §7) ——
+   Mesma anatomia do cartão; skipped esmaece e não oferece ação de fila. */
+.ticket.skipped { background: #fbf9fd; }
+.ticket.skipped .ticket-info h3 { color: #6b5f78; }
+.ticket.skipped .ticket-head-right .status { color: #5f5268; background: #f1edf4; }
+.ticket.skipped .card-summary { color: #6b5f78; }
+.ticket.confirmed .status.confirmed { color: #4a1a8f; background: var(--pale); }
+
+/* —— P1-6 · "Ver bilhete" é rótulo visual, não controle (FZ-4107 §7) ——
+   O cabeçalho inteiro expande; o texto é dica, não alvo. */
+.ticket-hint {
+  font-weight: 400; color: var(--muted); pointer-events: none;
+  user-select: none; white-space: nowrap;
+}
+
+/* —— P2-8 · alvos de toque ≥44×44 também nos controles de demonstração —— */
+.prototype-toolbar button,
+.prototype-toolbar .toolbar-link { min-height: 44px; }
+.prototype-toolbar .reset { min-width: 44px; }
+.notice button { min-height: 44px; }
+a.skip { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* —— P1-7 · lista de chamadas no modal —— */
+dialog .qr-option small { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* —— P2-9 / P2-1 · dia no cabeçalho direito —— */
+.day-weekday { font-family: Inter, Arial, sans-serif; letter-spacing: 0; font-size: 11px; }
+.fine-print { font-size: 12px; }
+
+/* —— DEMO ONLY — variantes de comparação; não fazem parte do
+   componente de produção (FZ-4107 §2). Mantidas para as pranchas
+   variantes.html / variantes-etapas.html / variantes-navegacao.html. —— */

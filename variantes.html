@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27/%3E">
+<meta name="theme-color" content="#32006b">
+<title>Variantes do card de conclusão · Filazero</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="variantes.css">
+</head>
+<body>
+<a class="skip" href="#variantes">Ir para as variantes</a>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand-area">
+      <img class="logo" src="assets/filazero-logo.svg" alt="Filazero">
+      <span>Teste de cor · card de conclusão</span>
+    </div>
+    <div class="v-top-right">
+      <a class="v-cross" href="variantes-etapas.html">Card de etapa
+        <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+      </a>
+      <a class="v-cross" href="variantes-navegacao.html">Navegação horizontal
+        <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+      </a>
+      <a class="v-open" id="open-proto" href="index.html#etapa-1">Abrir protótipo
+        <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="v-main" id="variantes">
+  <div class="v-intro">
+    <div>
+      <p class="eyebrow">Carteira de Jornadas · etapa concluída</p>
+      <h1>O card de conclusão em seis tratamentos.</h1>
+      <p class="v-lede">Mesmo conteúdo, mesma diagramação, seis decisões de cor para o card que fecha a etapa. O card atual é o ponto de partida (A); os outros cinco mudam onde o verde e o roxo aparecem. Os números abaixo de cada amostra são o contraste medido do texto contra o fundo do próprio card. Escolha uma e aplique — o protótipo muda só essa cor. As peças que abrem cada etapa têm uma prancha própria, no atalho “Card de etapa”.</p>
+    </div>
+    <aside class="v-diagnosis" aria-labelledby="diagnosis-title">
+      <h2 id="diagnosis-title">O que está estranho hoje</h2>
+      <ol>
+        <li><b>01</b><span><strong>Verde sobre roxo.</strong> O card concluído é o único bloco verde de uma tela roxa — o preenchimento verde briga com o lilás dos bilhetes.</span></li>
+        <li><b>02</b><span><strong>Contraste no limite.</strong> O eyebrow verde sobre o verde pálido mede 4,66:1. Passa no AA, mas é o texto mais apertado do card.</span></li>
+        <li><b>03</b><span><strong>O check já comunica.</strong> O ícone e o texto “Tudo certo” dizem o que aconteceu; a cor não precisa carregar o card inteiro.</span></li>
+      </ol>
+    </aside>
+  </div>
+
+  <div class="v-status">
+    <p id="apply-status" role="status">Nenhuma variante aplicada — o protótipo segue com o card atual.</p>
+    <button type="button" id="reset-variant" hidden>Voltar ao original</button>
+  </div>
+
+  <div class="v-legend">
+    <p class="eyebrow">Amostras estáticas · AA para texto = 4,5:1</p>
+    <p>Contraste medido contra o fundo de cada card</p>
+  </div>
+
+  <div class="v-grid">
+
+    <!-- A · atual -->
+    <article class="v-item" data-item="a">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">A</span>
+        <div class="v-name"><h2>Verde pálido</h2><span class="v-tag">Atual</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true">
+          <span class="v-swatch" style="background:#edf6f2" title="Fundo"></span>
+          <span class="v-swatch" style="background:#291d38" title="Título"></span>
+          <span class="v-swatch" style="background:#007d5c" title="Acento"></span>
+        </div>
+        <dl class="v-stats">
+          <div class="v-stat"><dt>Título</dt><dd>14,4</dd></div>
+          <div class="v-stat"><dt>Apoio</dt><dd>6,4</dd></div>
+          <div class="v-stat"><dt>Botão</dt><dd>5,1</dd></div>
+        </dl>
+      </header>
+      <div class="v-stage" data-stage-card="a">
+        <div class="finished-banner">
+          <span class="finished-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <div class="finished-copy">
+            <span class="eyebrow">Tudo certo</span>
+            <h3>Etapa resolvida.</h3>
+            <p>Você pode consultar os bilhetes desta etapa e seguir para a próxima quando quiser.</p>
+          </div>
+          <span class="finished-action">Ir para Atendimentos <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
+        </div>
+      </div>
+      <p class="v-note">O desenho de hoje. O verde preenche o card inteiro e o eyebrow fica em 4,66:1 — o ponto mais frágil.</p>
+      <div class="v-foot"><button type="button" class="v-apply" data-apply="a" aria-pressed="false" aria-label="Aplicar variante A, Verde pálido, no protótipo">Aplicar no protótipo</button></div>
+    </article>
+
+    <!-- B -->
+    <article class="v-item" data-item="b">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">B</span>
+        <div class="v-name"><h2>Roxo sólido</h2><span class="v-tag">Marco</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true">
+          <span class="v-swatch" style="background:#32006b" title="Fundo"></span>
+          <span class="v-swatch" style="background:#ffffff" title="Título"></span>
+          <span class="v-swatch" style="background:#d8c2f5" title="Acento"></span>
+        </div>
+        <dl class="v-stats">
+          <div class="v-stat"><dt>Título</dt><dd>15,6</dd></div>
+          <div class="v-stat"><dt>Apoio</dt><dd>10,7</dd></div>
+          <div class="v-stat"><dt>Botão</dt><dd>15,6</dd></div>
+        </dl>
+      </header>
+      <div class="v-stage" data-stage-card="b">
+        <div class="finished-banner">
+          <span class="finished-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <div class="finished-copy">
+            <span class="eyebrow">Tudo certo</span>
+            <h3>Etapa resolvida.</h3>
+            <p>Você pode consultar os bilhetes desta etapa e seguir para a próxima quando quiser.</p>
+          </div>
+          <span class="finished-action">Ir para Atendimentos <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
+        </div>
+      </div>
+      <p class="v-note">O card vira um bloco de marca: fundo roxo profundo, título branco e check lilás. Nada fora da paleta do sistema.</p>
+      <div class="v-foot"><button type="button" class="v-apply" data-apply="b" aria-pressed="false" aria-label="Aplicar variante B, Roxo sólido, no protótipo">Aplicar no protótipo</button></div>
+    </article>
+
+    <!-- C -->
+    <article class="v-item" data-item="c">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">C</span>
+        <div class="v-name"><h2>Lilás claro</h2><span class="v-tag">Suave</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true">
+          <span class="v-swatch" style="background:#f3e9ff" title="Fundo"></span>
+          <span class="v-swatch" style="background:#291d38" title="Título"></span>
+          <span class="v-swatch" style="background:#8c27ff" title="Acento"></span>
+        </div>
+        <dl class="v-stats">
+          <div class="v-stat"><dt>Título</dt><dd>13,5</dd></div>
+          <div class="v-stat"><dt>Apoio</dt><dd>6,8</dd></div>
+          <div class="v-stat"><dt>Botão</dt><dd>7,7</dd></div>
+        </dl>
+      </header>
+      <div class="v-stage" data-stage-card="c">
+        <div class="finished-banner">
+          <span class="finished-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <div class="finished-copy">
+            <span class="eyebrow">Tudo certo</span>
+            <h3>Etapa resolvida.</h3>
+            <p>Você pode consultar os bilhetes desta etapa e seguir para a próxima quando quiser.</p>
+          </div>
+          <span class="finished-action">Ir para Atendimentos <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
+        </div>
+      </div>
+      <p class="v-note">A mesma família dos bilhetes em repouso. O roxo fica no ícone e no botão, e o texto de apoio sobe para 6,8:1.</p>
+      <div class="v-foot"><button type="button" class="v-apply" data-apply="c" aria-pressed="false" aria-label="Aplicar variante C, Lilás claro, no protótipo">Aplicar no protótipo</button></div>
+    </article>
+
+    <!-- D -->
+    <article class="v-item" data-item="d">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">D</span>
+        <div class="v-name"><h2>Papel com acento</h2><span class="v-tag">Neutro</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true">
+          <span class="v-swatch" style="background:#ffffff" title="Fundo"></span>
+          <span class="v-swatch" style="background:#291d38" title="Título"></span>
+          <span class="v-swatch" style="background:#32006b" title="Acento"></span>
+        </div>
+        <dl class="v-stats">
+          <div class="v-stat"><dt>Título</dt><dd>15,8</dd></div>
+          <div class="v-stat"><dt>Apoio</dt><dd>5,3</dd></div>
+          <div class="v-stat"><dt>Botão</dt><dd>15,6</dd></div>
+        </dl>
+      </header>
+      <div class="v-stage" data-stage-card="d">
+        <div class="finished-banner">
+          <span class="finished-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <div class="finished-copy">
+            <span class="eyebrow">Tudo certo</span>
+            <h3>Etapa resolvida.</h3>
+            <p>Você pode consultar os bilhetes desta etapa e seguir para a próxima quando quiser.</p>
+          </div>
+          <span class="finished-action">Ir para Atendimentos <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
+        </div>
+      </div>
+      <p class="v-note">Card branco como os atendimentos; o peso vai todo para o botão roxo. É a opção que menos disputa atenção com a lista.</p>
+      <div class="v-foot"><button type="button" class="v-apply" data-apply="d" aria-pressed="false" aria-label="Aplicar variante D, Papel com acento, no protótipo">Aplicar no protótipo</button></div>
+    </article>
+
+    <!-- E -->
+    <article class="v-item" data-item="e">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">E</span>
+        <div class="v-name"><h2>Lilás cheio</h2><span class="v-tag">Vibrante</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true">
+          <span class="v-swatch" style="background:#d8c2f5" title="Fundo"></span>
+          <span class="v-swatch" style="background:#102e26" title="Título"></span>
+          <span class="v-swatch" style="background:#32006b" title="Acento"></span>
+        </div>
+        <dl class="v-stats">
+          <div class="v-stat"><dt>Título</dt><dd>11,2</dd></div>
+          <div class="v-stat"><dt>Apoio</dt><dd>8,0</dd></div>
+          <div class="v-stat"><dt>Botão</dt><dd>15,6</dd></div>
+        </dl>
+      </header>
+      <div class="v-stage" data-stage-card="e">
+        <div class="finished-banner">
+          <span class="finished-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <div class="finished-copy">
+            <span class="eyebrow">Tudo certo</span>
+            <h3>Etapa resolvida.</h3>
+            <p>Você pode consultar os bilhetes desta etapa e seguir para a próxima quando quiser.</p>
+          </div>
+          <span class="finished-action">Ir para Atendimentos <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
+        </div>
+      </div>
+      <p class="v-note">O lilás ocupa o card inteiro com tinta escura. É o mais chamativo — funciona se a etapa concluída for um marco, não um aviso.</p>
+      <div class="v-foot"><button type="button" class="v-apply" data-apply="e" aria-pressed="false" aria-label="Aplicar variante E, Lilás cheio, no protótipo">Aplicar no protótipo</button></div>
+    </article>
+
+    <!-- F -->
+    <article class="v-item" data-item="f">
+      <header class="v-head">
+        <span class="v-letter" aria-hidden="true">F</span>
+        <div class="v-name"><h2>Verde pontual</h2><span class="v-tag">Equilibrado</span><span class="v-applied">Em uso</span></div>
+        <div class="v-swatches" aria-hidden="true">
+          <span class="v-swatch" style="background:#ffffff" title="Fundo"></span>
+          <span class="v-swatch" style="background:#291d38" title="Título"></span>
+          <span class="v-swatch" style="background:#007d5c" title="Acento"></span>
+        </div>
+        <dl class="v-stats">
+          <div class="v-stat"><dt>Título</dt><dd>15,8</dd></div>
+          <div class="v-stat"><dt>Apoio</dt><dd>5,3</dd></div>
+          <div class="v-stat"><dt>Botão</dt><dd>5,1</dd></div>
+        </dl>
+      </header>
+      <div class="v-stage" data-stage-card="f">
+        <div class="finished-banner">
+          <span class="finished-icon" aria-hidden="true"><svg class="od-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <div class="finished-copy">
+            <span class="eyebrow">Tudo certo</span>
+            <h3>Etapa resolvida.</h3>
+            <p>Você pode consultar os bilhetes desta etapa e seguir para a próxima quando quiser.</p>
+          </div>
+          <span class="finished-action">Ir para Atendimentos <svg class="od-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
+        </div>
+      </div>
+      <p class="v-note">Mantém o verde como sinal de sucesso, mas só no ícone, no eyebrow e na ação. O fundo branco devolve o card ao sistema.</p>
+      <div class="v-foot"><button type="button" class="v-apply" data-apply="f" aria-pressed="false" aria-label="Aplicar variante F, Verde pontual, no protótipo">Aplicar no protótipo</button></div>
+    </article>
+
+  </div>
+
+  <aside class="v-reco">
+    <span class="v-reco-icon" aria-hidden="true">
+      <svg class="od-icon" viewBox="0 0 24 24"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>
+    </span>
+    <p><strong>Minha aposta: F no dia a dia e B quando a etapa precisa ser um marco.</strong> F mantém o sinal de sucesso fora do fundo e alinha o card ao mesmo chão branco dos atendimentos; B troca o verde por roxo profundo sem sair da paleta. A e E são justamente as que concentram a cor no preenchimento — o motivo do estranhamento atual.</p>
+  </aside>
+</main>
+
+<div id="v-toast" class="toast" role="status" hidden></div>
+<script src="variantes.js" defer></script>
+</body>
+</html>
