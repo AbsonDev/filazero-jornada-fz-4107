@@ -355,7 +355,10 @@ dialog { max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overfl
    Motion — uma linguagem só: assentamento
    ───────────────────────────────────────────────────────────────
    Regras desta camada:
-   · anima apenas transform, opacity e cor — nunca width, height, top, left;
+   · anima apenas transform, opacity e cor — a exceção é a expansão do
+     bilhete, que revela o detalhe por grid-template-rows (0fr → 1fr)
+     com o conteúdo recortado; é o gesto central e não tem equivalente
+     em transform;
    · nada em loop: atenção contínua compete com o conteúdo;
    · a cor é estado (troca imediata), o movimento é a explicação.
    A troca de etapa reescreve .tabs e #cards via innerHTML, então o estado
@@ -619,3 +622,78 @@ dialog .qr-option small { display: block; font-size: 12px; color: var(--muted); 
 /* —— DEMO ONLY — variantes de comparação; não fazem parte do
    componente de produção (FZ-4107 §2). Mantidas para as pranchas
    variantes.html / variantes-etapas.html / variantes-navegacao.html. —— */
+
+/* ═══════════════════════════════════════════════════════════════
+   FZ-4107 · Expansão do bilhete
+   ───────────────────────────────────────────────────────────────
+   O cartão não é recriado ao abrir/fechar: toggleCard() alterna
+   .expanded no mesmo nó. A altura é revelada por grid-template-rows
+   (0fr → 1fr) com o conteúdo recortado; opacidade/translate e cor
+   acompanham. Fechado, o detalhe fica inert + visibility:hidden —
+   fora da árvore de acessibilidade e do tab order.
+   ═══════════════════════════════════════════════════════════════ */
+.ticket-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  padding: 0;
+  border-top: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    grid-template-rows var(--m-dur-slow) var(--m-ease-out),
+    visibility 0s linear var(--m-dur-slow);
+}
+.ticket.expanded .ticket-detail {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    grid-template-rows var(--m-dur-slow) var(--m-ease-out),
+    visibility 0s;
+}
+.ticket-detail-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+.ticket-detail-inner {
+  padding: 21px 22px 22px;
+  border-top: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity var(--m-dur-fast) var(--m-ease-out),
+    transform var(--m-dur) var(--m-ease-out);
+}
+.ticket.expanded .ticket-detail-inner {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--m-stagger);
+}
+
+/* O topo e o resumo trocam de superfície junto com o detalhe; o chevron
+   acompanha com a mola curta já usada no assentamento da navegação. */
+.ticket-top {
+  transition: background-color var(--m-dur) var(--m-ease-out);
+}
+.card-summary {
+  transition: background-color var(--m-dur) var(--m-ease-out);
+}
+.chevron {
+  transition: transform var(--m-dur-slow) var(--m-spring);
+}
+
+@media (max-width: 760px) {
+  .ticket-detail-inner { padding: 19px 16px; }
+}
+
+/* Reduced motion: o conteúdo continua entrando/saindo, mas sem altura
+   animada, deslocamento ou atraso de visibilidade. */
+@media (prefers-reduced-motion: reduce) {
+  .ticket-detail,
+  .ticket-detail-inner,
+  .ticket-top,
+  .card-summary,
+  .chevron {
+    transition: none !important;
+  }
+}

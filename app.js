@@ -91,7 +91,10 @@ const labels={completed:'Concluído',waiting:'Na fila',called:'É a sua vez',sta
    render() recria a faixa e os cards a cada chamada (innerHTML), então a
    chegada de um estado novo é @keyframes em nó recém-criado. O que sobrevive
    entre renders — o indicador de etapa e a barra fixa — usa transição.
-   Nada anima largura, altura, top ou left: só transform, opacity e cor. */
+   Nada anima largura, altura, top ou left: só transform, opacity e cor.
+   A exceção é a expansão do bilhete: o detalhe é revelado por
+   grid-template-rows (0fr → 1fr), com o conteúdo recortado; é o gesto
+   central do cartão e não tem equivalente em transform. */
 let renderedStage=null;
 const navEnter={isEntering:false,index:0};
 /* O trilho rola durante o gesto: as abas são criadas uma vez em syncTabs()
@@ -214,7 +217,15 @@ function card(t){
   const open=expanded[selectedStage]===t.id;
   const stagger=navEnter.isEntering?' style="--i:'+(navEnter.index++)+'"':'';
   const hint=(t.status==='completed'&&!t.feedback)?'<button class="text-button small-action" onclick="openFeedback(\''+t.id+'\')">Avaliar '+svg('right')+'</button>':'<span class="ticket-hint" aria-hidden="true">Ver bilhete</span>';
-  return '<article class="ticket '+t.status+(open?' expanded':'')+(navEnter.isEntering?' stage-card':'')+'" id="ticket-'+t.id+'"'+stagger+'><button class="ticket-top" aria-expanded="'+open+'" aria-controls="detail-'+t.id+'" onclick="toggleCard(\''+t.id+'\')"><span class="ticket-info"><span class="eyebrow">'+(t.id===scannedId?'Bilhete do seu QR code':'Atendimento')+'</span><h3>'+t.name+'</h3></span><span class="ticket-head-right"><span class="status '+t.status+'">'+labels[t.status]+'</span></span>'+svg('down','chevron')+'</button><div class="card-summary"><span>'+summary(t)+'</span>'+hint+'</div><div class="ticket-detail" id="detail-'+t.id+'" '+(!open?'hidden':'')+'>'+detail(t)+'</div></article>';
+  return '<article class="ticket '+t.status+(open?' expanded':'')+(navEnter.isEntering?' stage-card':'')+'" id="ticket-'+t.id+'"'+stagger+'>'+
+    '<button class="ticket-top" aria-expanded="'+open+'" aria-controls="detail-'+t.id+'" onclick="toggleCard(\''+t.id+'\')">'+
+      '<span class="ticket-info"><span class="eyebrow">'+(t.id===scannedId?'Bilhete do seu QR code':'Atendimento')+'</span><h3>'+t.name+'</h3></span>'+
+      '<span class="ticket-head-right"><span class="status '+t.status+'">'+labels[t.status]+'</span></span>'+svg('down','chevron')+
+    '</button>'+
+    '<div class="card-summary"><span>'+summary(t)+'</span>'+hint+'</div>'+
+    '<div class="ticket-detail" id="detail-'+t.id+'" aria-hidden="'+(!open)+'"'+(!open?' inert':'')+'>'+
+      '<div class="ticket-detail-clip"><div class="ticket-detail-inner">'+detail(t)+'</div></div>'+
+    '</div></article>';
 }
 /* FZ-4107 §7: para um bilhete futuro, a etapa anterior em 1-based é exatamente
    t.stage (índice 0-based). Não somar 1: seria a etapa em que o paciente já está. */
@@ -286,21 +297,67 @@ function selectStage(i,fromHistory=false){
 function revealTab(i){railArmed=false;if(railSettling){railSettling=false;return}const rail=document.getElementById('tabs'),tab=document.getElementById('tab-'+i);if(!rail||!tab||rail.scrollWidth<=rail.clientWidth)return;const r=rail.getBoundingClientRect(),t=tab.getBoundingClientRect(),pad=2;if(t.left<r.left+pad)rail.scrollBy({left:t.left-r.left-pad,behavior:'smooth'});else if(t.right>r.right-pad)rail.scrollBy({left:t.right-r.right+pad,behavior:'smooth'})}
 function changeStage(d){selectStage(selectedStage+d)}
 function goToStage(i){selectStage(i);requestAnimationFrame(()=>document.getElementById('tab-'+i)?.focus())}
-/* P0-4 · o header é recriado por render(): devolver o foco ao mesmo cartão. */
-function toggleCard(id){expanded[selectedStage]=expanded[selectedStage]===id?null:id;render();syncUrl('push');requestAnimationFrame(()=>{document.getElementById('ticket-'+id)?.querySelector('.ticket-top')?.focus({preventScroll:true})})}
-function focusTicket(id){
+/* Abre/fecha o detalhe no mesmo nó: recriar o cartão via render() mataria
+   a transição de fechamento. O estado (expanded) continua sendo a fonte. */
+function setCardExpanded(card,open){
+  if(!card)return;
+  card.classList.toggle('expanded',open);
+  card.querySelector('.ticket-top')?.setAttribute('aria-expanded',String(open));
+  const detail=card.querySelector('.ticket-detail');
+  if(!detail)return;
+  detail.toggleAttribute('inert',!open);
+  detail.setAttribute('aria-hidden',String(!open));
+}
+function toggleCard(id){
+  const open=expanded[selectedStage]!==id;
+  expanded[selectedStage]=open?id:null;
+  document.querySelectorAll('#cards .ticket.expanded').forEach(card=>setCardExpanded(card,false));
+  if(open)setCardExpanded(document.getElementById('ticket-'+id),true);
+  syncUrl('push');
+  requestAnimationFrame(()=>document.getElementById('ticket-'+id)?.querySelector('.ticket-top')?.focus({preventScroll:true}));
+}
+function focusTicket(id,forceRender=false){
   const t=tickets.find(x=>x.id===id);
   if(!t)return;
-  selectedStage=t.stage;expanded[t.stage]=id;render();syncUrl('push');
+  const card=!forceRender&&selectedStage===t.stage?document.getElementById('ticket-'+id):null;
+  if(card){
+    expanded[t.stage]=id;
+    document.querySelectorAll('#cards .ticket.expanded').forEach(el=>{if(el!==card)setCardExpanded(el,false)});
+    setCardExpanded(card,true);
+    syncUrl('push');
+  }else{
+    selectedStage=t.stage;expanded[t.stage]=id;render();syncUrl('push');
+  }
   requestAnimationFrame(()=>{const btn=document.getElementById('ticket-'+id)?.querySelector('.ticket-top');btn?.scrollIntoView({behavior:scrollBehavior(),block:'start'});btn?.focus({preventScroll:true})});
 }
-function openFeedback(id){feedbackOpen.add(id);expanded[selectedStage]=id;render();requestAnimationFrame(()=>document.querySelector('#ticket-'+id+' .stars button')?.focus({preventScroll:true}))}
+function openFeedback(id){
+  const t=tickets.find(x=>x.id===id);
+  if(!t)return;
+  const card=selectedStage===t.stage?document.getElementById('ticket-'+id):null;
+  const wasOpen=!!card&&card.classList.contains('expanded');
+  feedbackOpen.add(id);
+  expanded[t.stage]=wasOpen?id:null;
+  if(selectedStage!==t.stage)selectedStage=t.stage;
+  render();
+  if(wasOpen){
+    syncUrl('push');
+    requestAnimationFrame(()=>document.querySelector('#ticket-'+id+' .stars button')?.focus({preventScroll:true}));
+    return;
+  }
+  expanded[t.stage]=id;
+  requestAnimationFrame(()=>{
+    const el=document.getElementById('ticket-'+id);
+    setCardExpanded(el,true);
+    syncUrl('push');
+    requestAnimationFrame(()=>el?.querySelector('.stars button')?.focus({preventScroll:true}));
+  });
+}
 function rate(id,n){drafts[id]||={rating:0,comment:''};drafts[id].rating=n;render();document.querySelectorAll('#ticket-'+id+' .stars button')[n-1]?.focus({preventScroll:true})}
 function comment(id,value){drafts[id]||={rating:0,comment:''};drafts[id].comment=value;save()}
 function submitFeedback(id){const t=tickets.find(x=>x.id===id);if(!drafts[id]?.rating)return;t.feedback={...drafts[id]};feedbackOpen.delete(id);render();toast('Avaliação enviada. Obrigado por compartilhar!')}
 function openModal(html){document.getElementById('modal-body').innerHTML=html;document.getElementById('modal').showModal()}
 function closeModal(){document.getElementById('modal').close()}
-function scanTicket(id){scannedId=id;focusTicket(id)}
+function scanTicket(id){scannedId=id;focusTicket(id,true)}
 function openQR(){openModal('<div class="qr-illustration">'+svg('qr')+'</div><span class="eyebrow muted">Demonstração · dados fictícios</span><h2 id="modal-title">Um bilhete. Sua jornada inteira.</h2><p>Escolha um QR de exemplo. A carteira abre na etapa e no atendimento correspondente.</p>'+tickets.map(t=>'<button class="secondary qr-option" onclick="closeModal();scanTicket(\''+t.id+'\');toast(\'Jornada encontrada a partir deste atendimento\')"><span>'+t.name+'</span>'+svg('right')+'</button>').join(''))}
 function simulateCall(){let t=tickets.find(t=>t.id==='image'&&t.status==='waiting')||tickets.find(t=>t.status==='waiting');if(!t){toast('Não há bilhetes aguardando. Reinicie para explorar novamente.');return}t.status='called';render();toast('Chamada recebida para '+t.name+'. Sua navegação foi preservada.')}
 function simulateComplete(){const id=expanded[selectedStage];const t=tickets.find(t=>t.id===id&&['waiting','called','started'].includes(t.status))||tickets.find(t=>t.status==='called');if(!t){toast('Abra um bilhete disponível para simular a conclusão.');return}t.status='completed';t.time='Concluído agora';syncJourneyStatus();render();toast(t.name+' concluído. Você já pode avaliar este atendimento.')}
